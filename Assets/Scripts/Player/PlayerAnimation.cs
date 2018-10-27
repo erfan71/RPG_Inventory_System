@@ -9,17 +9,20 @@ public class PlayerAnimation : MonoBehaviour {
 
     public Animator Animator;
     private PlayerInput _playerInput;
+    private PlayerMovement _playerMovement;
 
     private const string HORIZONTAL_VALUE_PARAMETER_NAME = "HorizontalValue";
-    private const string HORIZONTAL_STATE_PARAMETER_NAME = "Horizontal";
+    private const string MOVE_STATE_PARAMETER_NAME = "IsMoving";
     private const string VERTICAL_VALUE_PARAMETER_NAME = "VerticalValue";
-    private const string VERTICAL_STATE_PARAMETER_NAME = "Vertical";
     private const string SPEED_MAGNITUDE_PARAMETER_NAME = "SpeedMagnitude";
 
+    private float _lastHorizontalValue;
+    private float _lastVerticalValue;
 
     void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
+        _playerMovement = GetComponent<PlayerMovement>();
 
     }
     void Start () {
@@ -33,17 +36,23 @@ public class PlayerAnimation : MonoBehaviour {
         float horizontalValue = _playerInput.GetHorizontal();
         float verticalValue = _playerInput.GetVertical();
 
-        if (horizontalValue == 0)
-            Animator.SetBool(HORIZONTAL_STATE_PARAMETER_NAME, false);
+        Debug.Log(_lastHorizontalValue);
+        if (horizontalValue == 0 && verticalValue == 0)
+        {
+            Animator.SetBool(MOVE_STATE_PARAMETER_NAME, false);
+            horizontalValue = _lastHorizontalValue;
+            verticalValue = _lastVerticalValue;
+        }
         else
-            Animator.SetBool(HORIZONTAL_STATE_PARAMETER_NAME, true);
-        if (verticalValue == 0)
-            Animator.SetBool(VERTICAL_STATE_PARAMETER_NAME, false);
-        else
-            Animator.SetBool(VERTICAL_STATE_PARAMETER_NAME, true);
+        {
+            Animator.SetBool(MOVE_STATE_PARAMETER_NAME, true);
+        }
 
         Animator.SetFloat(HORIZONTAL_VALUE_PARAMETER_NAME, horizontalValue);
         Animator.SetFloat(VERTICAL_VALUE_PARAMETER_NAME, verticalValue);
-        Animator.SetFloat(SPEED_MAGNITUDE_PARAMETER_NAME,  Mathf.Max(Mathf.Abs( horizontalValue), Mathf.Abs( verticalValue)));
+        Animator.SetFloat(SPEED_MAGNITUDE_PARAMETER_NAME, _playerMovement.GetVelocityMagnitude());
+        _lastHorizontalValue = horizontalValue;
+        _lastVerticalValue = verticalValue;
+
     }
 }

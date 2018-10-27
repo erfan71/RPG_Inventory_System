@@ -34,10 +34,11 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         RigidBody.velocity = new Vector2(_playerInput.GetHorizontal(), _playerInput.GetVertical()).normalized* SpeedScale;
+        
     }
     public float GetVelocityMagnitude()
     {
-        return RigidBody.velocity.magnitude;
+        return Mathf.Max(Mathf.Abs( _playerInput.GetHorizontal()), Mathf.Abs( _playerInput.GetVertical())) * SpeedScale;
     }
     public Vector3 GetPosition()
     {
