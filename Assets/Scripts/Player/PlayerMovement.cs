@@ -33,10 +33,14 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        RigidBody.velocity = new Vector2(_playerInput.GetHorizontal(), _playerInput.GetVertical())* SpeedScale;
+        RigidBody.velocity = new Vector2(_playerInput.GetHorizontal(), _playerInput.GetVertical()).normalized* SpeedScale;
     }
     public float GetVelocityMagnitude()
     {
         return RigidBody.velocity.magnitude;
+    }
+    public Vector3 GetPosition()
+    {
+        return RigidBody.transform.position;
     }
 }

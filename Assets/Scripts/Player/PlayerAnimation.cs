@@ -9,7 +9,6 @@ public class PlayerAnimation : MonoBehaviour {
 
     public Animator Animator;
     private PlayerInput _playerInput;
-    private PlayerMovement _playerMovement;
 
     private const string HORIZONTAL_VALUE_PARAMETER_NAME = "HorizontalValue";
     private const string HORIZONTAL_STATE_PARAMETER_NAME = "Horizontal";
@@ -21,7 +20,6 @@ public class PlayerAnimation : MonoBehaviour {
     void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
-        _playerMovement = GetComponent<PlayerMovement>();
 
     }
     void Start () {
