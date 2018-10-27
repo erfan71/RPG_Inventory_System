@@ -36,7 +36,6 @@ public class PlayerAnimation : MonoBehaviour {
         float horizontalValue = _playerInput.GetHorizontal();
         float verticalValue = _playerInput.GetVertical();
 
-        Debug.Log(_lastHorizontalValue);
         if (horizontalValue == 0 && verticalValue == 0)
         {
             Animator.SetBool(MOVE_STATE_PARAMETER_NAME, false);

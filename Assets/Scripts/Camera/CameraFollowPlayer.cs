@@ -23,15 +23,54 @@ public class CameraFollowPlayer : MonoBehaviour
     void LateUpdate()
     {
         Vector2 currentPlayerPos = Player.GetPosition();
+        Vector2 currentCameraPos = transform.position;
         Vector2 positionDiff = currentPlayerPos - _lastPos;
+        _lastPos = currentPlayerPos;
+        if (positionDiff.sqrMagnitude == 0) return;
 
-        Vector3 currentCameraPos = transform.position;
+        float cameraRightAncher = currentCameraPos.x + _cameraWidthHalf * 0.5f;
+        float cameraLeftAncher = currentCameraPos.x - _cameraWidthHalf * 0.5f;
+        float cameraTopAncher = currentCameraPos.y + _cameraHeightHalf * 0.5f;
+        float cameraDownAncher = currentCameraPos.y - _cameraHeightHalf * 0.5f;
+
+        bool cameraFollow = true;
+
+        if (currentPlayerPos.x <= cameraLeftAncher)
+        {
+            if (positionDiff.x > 0)
+            {
+                cameraFollow = false;
+            }
+        }
+        else if (currentPlayerPos.x >= cameraRightAncher)
+        {
+            if (positionDiff.x < 0)
+            {
+                cameraFollow = false;
+            }
+        }
+        if (currentPlayerPos.y <= cameraDownAncher)
+        {
+            if (positionDiff.y > 0)
+            {
+                cameraFollow = false;
+            }
+        }
+        else if (currentPlayerPos.y >= cameraTopAncher)
+        {
+            if (positionDiff.y < 0)
+            {
+                cameraFollow = false;
+            }
+        }
+
+        if (!cameraFollow) return;
+
         Vector2 nextCameraPos = currentCameraPos;
 
         nextCameraPos.x = Mathf.Clamp(currentCameraPos.x + positionDiff.x, _mapBoundry.bounds.min.x + _cameraWidthHalf, _mapBoundry.bounds.max.x - _cameraWidthHalf);
         nextCameraPos.y = Mathf.Clamp(currentCameraPos.y + positionDiff.y, _mapBoundry.bounds.min.y + _cameraHeightHalf, _mapBoundry.bounds.max.y - _cameraHeightHalf);
 
-        transform.position = new Vector3(nextCameraPos.x, nextCameraPos.y, currentCameraPos.z);
-        _lastPos = currentPlayerPos;
+        transform.position = new Vector3(nextCameraPos.x, nextCameraPos.y, transform.position.z);
     }
 }
