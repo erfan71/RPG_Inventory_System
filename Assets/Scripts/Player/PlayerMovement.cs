@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerInput _playerInput;
 
+    public float SpeedScale;
+
     void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
@@ -31,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        RigidBody.velocity = new Vector2(_playerInput.GetHorizontal(), _playerInput.GetVertical());
+        RigidBody.velocity = new Vector2(_playerInput.GetHorizontal(), _playerInput.GetVertical())* SpeedScale;
+    }
+    public float GetVelocityMagnitude()
+    {
+        return RigidBody.velocity.magnitude;
     }
 }
