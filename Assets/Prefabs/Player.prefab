@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114541882494341060}
   - component: {fileID: 114226254463735088}
   - component: {fileID: 114233357416606382}
-  - component: {fileID: 114011647865960304}
+  - component: {fileID: 114512809675611812}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -139,18 +139,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114011647865960304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855439210458454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff79771ab3627a44cac386b589707363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinDistanceToPickupable: 5
 --- !u!114 &114226254463735088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -174,6 +162,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 95877839762232044}
+--- !u!114 &114512809675611812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855439210458454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e51f1b35ca2fce4193e0d4e30fd26f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickupStrategyMethodName: 3
 --- !u!114 &114541882494341060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RigidBody: {fileID: 50651611956058638}
-  SpeedScale: 5
+  SpeedScale: 2
 --- !u!212 &212451893489234612
 SpriteRenderer:
   m_ObjectHideFlags: 1

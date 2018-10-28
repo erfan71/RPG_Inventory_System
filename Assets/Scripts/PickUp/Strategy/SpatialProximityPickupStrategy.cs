@@ -4,7 +4,8 @@ using UnityEngine;
 /// <summary>
 /// *This class Implement the Option 1 of Pickuping algorithmes
 /// *Option 1: Pick up items by clicking on the item in predefined spatial proximity
-/// *The algorithmes suffer from perforamce and It is very slow if the number of PickupableObject gets high
+/// *The algorithmes suffer from perforamce and It is very slow if the number of PickupableObject gets high/
+///  I use a coroutine to prevent from freezing in for loop
 /// *There are ways to optimize the code like:
 ///  Partially limit the number of PickupableObject, for example detect only visible items
 /// *Another Way to implement the requested feature is move the distance calculation part to each PickupableObject. 
@@ -16,7 +17,6 @@ using UnityEngine;
 /// </summary>
 public class SpatialProximityPickupStrategy : PickupStrategy
 {
-    public float MinDistanceToPickupable;
     private PickupableObject[] _pickupableObjects;
     void Start()
     {
@@ -29,15 +29,18 @@ public class SpatialProximityPickupStrategy : PickupStrategy
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 inputWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            foreach (PickupableObject pickupable in _pickupableObjects)
+            StartCoroutine(FindingFinePickupable(inputWorldPosition));
+        }
+    }
+    IEnumerator FindingFinePickupable( Vector2 inputWorldPosition)
+    {
+        foreach (PickupableObject pickupable in _pickupableObjects)
+        {
+            if (Vector2.Distance(pickupable.GetCenterPosition(), inputWorldPosition) < PlayerPickUpStrategyHandler.MIN_DISTANCE_TO_PICKUPABLE)
             {
-                if (Vector2.Distance(pickupable.GetCenterPosition(), inputWorldPosition) < MinDistanceToPickupable)
-                {
-                    ItemPickedup(pickupable);
-                }
+                ItemPickedup(pickupable);
             }
-
+            yield return null;
         }
     }
 }

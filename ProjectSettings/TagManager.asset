@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pickupable
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - PickupableLayer
   - 
   - 
   - 
@@ -38,6 +39,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 3181611133
+    locked: 0
+  - name: Item
+    uniqueID: 503756797
+    locked: 0
+  - name: Player
+    uniqueID: 3021289447
+    locked: 0
+  - name: Obstacle
+    uniqueID: 3155143459
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
