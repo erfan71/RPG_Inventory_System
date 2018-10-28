@@ -43,4 +43,8 @@ public class PlayerMovement : MonoBehaviour
     {
         return RigidBody.transform.position;
     }
+    public Vector2 GetVelocityDirection()
+    {
+        return RigidBody.velocity.normalized;
+    }
 }
