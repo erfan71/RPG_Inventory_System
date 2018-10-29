@@ -10,6 +10,8 @@ public class GeneralPanel : MonoBehaviour {
     public GameObject PanelRoot;
     public KeyCode KeyBoardShortCut;
     public System.Action<GeneralPanel> OnOpenCloseActionCallBack;
+    public Text Title;
+    public string TitleText;
 
     public enum PopUpState
     {
@@ -29,6 +31,7 @@ public class GeneralPanel : MonoBehaviour {
         OpenButton.onClick.AddListener(() => OnOpenClicked());
         CloseButton.onClick.AddListener(() => OnCloseClicked());
         _state = PopUpState.Closed;
+        Title.text = TitleText;
     }
     private void Update()
     {
