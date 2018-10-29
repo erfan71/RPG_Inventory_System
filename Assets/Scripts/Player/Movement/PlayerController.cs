@@ -1,16 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPickUpStrategyController : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
-	// Use this for initialization
+    public GeneralPanel InventroyPanel;
+    public GeneralPanel EquipmentPanel;
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        InventroyPanel.OnOpenCloseActionCallBack += OnPanelOpenCloseActionCallBack;
+        EquipmentPanel.OnOpenCloseActionCallBack += OnPanelOpenCloseActionCallBack;
+
+    }
+
+    private void OnPanelOpenCloseActionCallBack(GeneralPanel panel)
+    {
+        if (panel.State == GeneralPanel.PopUpState.Opened)
+        {
+            if (panel is InventoryUI)
+            {
+                EquipmentPanel.ClosePanel();
+            }
+            else if (panel is EquipmentUI)
+            {
+                InventroyPanel.ClosePanel();
+            }
+        }
+    }
+
+    
 }
