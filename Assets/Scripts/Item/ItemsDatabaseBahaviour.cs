@@ -19,7 +19,8 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
     }
 
     #endregion
-    private Dictionary<int, Item> _itemDictionary;
+    private Dictionary<int, Item> _itemsDictionary;
+    private Dictionary<Item.Type, int> _itemTypesMaxDic;
     private bool isSetuped;
     private ItemsDatabase _itemsdDatabase;
 
@@ -34,10 +35,15 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
     {
         if (!isSetuped)
         {
-            _itemDictionary = new Dictionary<int, Item>();
+            _itemsDictionary = new Dictionary<int, Item>();
             foreach (Item item in _itemsdDatabase.Items)
             {
-                _itemDictionary.Add(item.Id, item);
+                _itemsDictionary.Add(item.Id, item);
+            }
+            _itemTypesMaxDic = new Dictionary<Item.Type, int>();
+            foreach (ItemsDatabase.TypeMaxStack item in _itemsdDatabase.TypesStackMax)
+            {
+                _itemTypesMaxDic.Add(item.Type, item.Max);
             }
             isSetuped = true;
         }
@@ -46,8 +52,8 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
     public Item GetItem(int itemId)
     {
         CheckCache();
-        if (_itemDictionary.ContainsKey(itemId))
-            return _itemDictionary[itemId];
+        if (_itemsDictionary.ContainsKey(itemId))
+            return _itemsDictionary[itemId];
         else
             return null;
     }
@@ -61,5 +67,9 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
     public Sprite GetItemSprite(int itemId)
     {
       return  GetItem(itemId).Image;
+    }
+    public int GetItemTypeMaxStackCount(Item.Type type)
+    {
+       return  _itemTypesMaxDic[type];
     }
 }

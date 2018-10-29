@@ -7,4 +7,11 @@ public class ItemsDatabase : ScriptableObject {
 
     public List<Item> Items;
     
+    [System.Serializable]
+    public struct TypeMaxStack
+    {
+        public Item.Type Type;
+        public int Max;
+    }
+    public List<TypeMaxStack> TypesStackMax;
 }

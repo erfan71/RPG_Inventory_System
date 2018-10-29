@@ -11,7 +11,7 @@ public class Item {
         SecondaryWeapon,
         Helmet,
         Torse,
-        Equippable
+        NotEquippable
     }
     public enum Stackability
     {
@@ -20,8 +20,15 @@ public class Item {
     }
     public enum Consumability
     {
-        Consume,
+        Consumable,
         NotConsumable
+    }
+    public enum Type
+    {
+        Coin,
+        Food,
+        Weapon,
+        Poition
     }
 
     public int Id;
@@ -29,6 +36,7 @@ public class Item {
     public EquipmentCategory Equipment;
     public Stackability Stacking;
     public Consumability Consuming;
+    public Type ItemType;
     public string Name;
 
 }

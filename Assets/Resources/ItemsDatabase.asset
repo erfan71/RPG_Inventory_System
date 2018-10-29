@@ -17,10 +17,26 @@ MonoBehaviour:
     Equipment: 0
     Stacking: 1
     Consuming: 1
+    ItemType: 2
     Name: Mace
   - Id: 1
     Image: {fileID: 21300000, guid: 30a4ca4371ed226438da38cba31762fc, type: 3}
     Equipment: 1
     Stacking: 1
     Consuming: 1
+    ItemType: 0
     Name: Golden Sheild
+  - Id: 2
+    Image: {fileID: 21300000, guid: 64c53faadd9c7434bb2991752d8733ab, type: 3}
+    Equipment: 4
+    Stacking: 0
+    Consuming: 0
+    ItemType: 1
+    Name: Red Pepper
+  TypesStackMax:
+  - Type: 0
+    Max: 1000
+  - Type: 1
+    Max: 2
+  - Type: 3
+    Max: 5
