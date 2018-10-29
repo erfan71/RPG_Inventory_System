@@ -11,12 +11,12 @@ public class PhysicsCircleCasting : PickupStrategy
     }
 		void FixedUpdate () {
         RaycastHit2D hit = Physics2D.CircleCast
-           (_playerMovement.GetPosition(), PlayerPickUpStrategyHandler.OVERLAP_RADIUS, _playerMovement.GetVelocityDirection(),
-           PlayerPickUpStrategyHandler.CIRCLE_CAST_DISTANCE, LayerMask.GetMask(PlayerPickUpStrategyHandler.PICKUPABLE_ITEM_LAYER));
+           (_playerMovement.GetPosition(), PlayerPickUpHandler.OVERLAP_RADIUS, _playerMovement.GetVelocityDirection(),
+           PlayerPickUpHandler.CIRCLE_CAST_DISTANCE, LayerMask.GetMask(PlayerPickUpHandler.PICKUPABLE_ITEM_LAYER));
         if (hit)
         {
             Transform hitTrans = hit.transform;
-            if (hitTrans.tag == PlayerPickUpStrategyHandler.PICKUPABLE_ITEM_TAG)
+            if (hitTrans.tag == PlayerPickUpHandler.PICKUPABLE_ITEM_TAG)
                 ItemPickedup(hitTrans.GetComponent<PickupableObject>());
         }
     }

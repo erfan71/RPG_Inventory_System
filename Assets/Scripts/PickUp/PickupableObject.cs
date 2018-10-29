@@ -2,10 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupableObject : MonoBehaviour {
+public class PickupableObject : ItemBehaviour {
 
-	public Vector2 GetCenterPosition()
+    public int ItemId;
+
+    public SpriteRenderer Renderer;
+    private void Start()
+    {
+        Setup(ItemId);
+        SetSprite();
+    }
+    void SetSprite()
+    {
+        Renderer.sprite = _item.Image;
+    }
+
+    public Vector2 GetCenterPosition()
     {
         return transform.position;
     }
+   
 }

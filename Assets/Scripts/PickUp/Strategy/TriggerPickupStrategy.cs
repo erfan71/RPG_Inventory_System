@@ -7,7 +7,7 @@ public class TriggerPickupStrategy : PickupStrategy {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(PlayerPickUpStrategyHandler.PICKUPABLE_ITEM_TAG))
+        if (collision.CompareTag(PlayerPickUpHandler.PICKUPABLE_ITEM_TAG))
         {
             ItemPickedup(collision.GetComponent<PickupableObject>());
         }

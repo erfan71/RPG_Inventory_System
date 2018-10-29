@@ -42,6 +42,8 @@ GameObject:
   - component: {fileID: 114226254463735088}
   - component: {fileID: 114233357416606382}
   - component: {fileID: 114512809675611812}
+  - component: {fileID: 114748387320033712}
+  - component: {fileID: 114073034470209568}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -139,6 +141,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114073034470209568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855439210458454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86daac5ddeedbb641a846333fa54f9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114226254463735088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -174,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickupStrategyMethodName: 3
+  InventoryContrtoller: {fileID: 114073034470209568}
 --- !u!114 &114541882494341060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +201,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigidBody: {fileID: 50651611956058638}
   SpeedScale: 2
+--- !u!114 &114748387320033712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855439210458454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15829fc318400343acfd23e02b582a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventroyPanel: {fileID: 0}
+  EquipmentPanel: {fileID: 0}
 --- !u!212 &212451893489234612
 SpriteRenderer:
   m_ObjectHideFlags: 1

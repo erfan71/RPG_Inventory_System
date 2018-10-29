@@ -36,7 +36,7 @@ public class SpatialProximityPickupStrategy : PickupStrategy
     {
         foreach (PickupableObject pickupable in _pickupableObjects)
         {
-            if (Vector2.Distance(pickupable.GetCenterPosition(), inputWorldPosition) < PlayerPickUpStrategyHandler.MIN_DISTANCE_TO_PICKUPABLE)
+            if (Vector2.Distance(pickupable.GetCenterPosition(), inputWorldPosition) < PlayerPickUpHandler.MIN_DISTANCE_TO_PICKUPABLE)
             {
                 ItemPickedup(pickupable);
             }

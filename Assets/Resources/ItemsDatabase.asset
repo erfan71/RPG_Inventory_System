@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25369fa262741274fa17c6748bace064, type: 3}
+  m_Name: ItemsDatabase
+  m_EditorClassIdentifier: 
+  Items:
+  - Id: 0
+    Image: {fileID: 21300000, guid: c29b1ec07852851409385f99b15115b1, type: 3}
+    Equipment: 0
+    Stacking: 1
+    Consuming: 1
+    Name: Mace
+  - Id: 1
+    Image: {fileID: 21300000, guid: 30a4ca4371ed226438da38cba31762fc, type: 3}
+    Equipment: 1
+    Stacking: 1
+    Consuming: 1
+    Name: Golden Sheild
