@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class GridItem : ItemBehaviour, IPointerClickHandler {
+public class GridItem : ItemBehaviour, IPointerClickHandler
+{
 
     public Image GridIcon;
     private GeneralPanel parentPanel;
@@ -38,21 +39,26 @@ public class GridItem : ItemBehaviour, IPointerClickHandler {
     {
         transform.position = screenPos;
     }
-    
+
     private void GoIntoTheAir()
     {
         _state = State.InTheAir;
-        transform.SetParent( parentPanel.CanvasRoot.transform);
+        transform.SetParent(parentPanel.CanvasRoot.transform);
         StartCoroutine(InTheAirControl());
         GetComponent<Image>().raycastTarget = false;
         ItemUnderTheMouse.Instance.SetCurrentDragedItem(this);
-   }
+    }
 
     private IEnumerator InTheAirControl()
     {
         while (_state == State.InTheAir)
         {
-            SetPosition(Input.mousePosition);
+            if (Input.GetKeyDown(InventoryController.Instance.ITEM_DROP_KEY_SHORTCUT))
+            {
+                ItemUnderTheMouse.Instance.SendItemToTheGround();
+            }
+            else
+                SetPosition(Input.mousePosition);
             yield return null;
         }
     }
@@ -88,7 +94,7 @@ public class GridItem : ItemBehaviour, IPointerClickHandler {
                 }
             }
         }
-       
+
 
 
 
@@ -97,5 +103,5 @@ public class GridItem : ItemBehaviour, IPointerClickHandler {
     {
         return parentPanel;
     }
-   
+
 }

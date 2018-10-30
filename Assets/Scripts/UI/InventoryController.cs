@@ -25,6 +25,7 @@ public class InventoryController : MonoBehaviour
     private PlayerPickUpHandler PlayerPickUp;
     private const string GRID_PREFAB_KEY = "GridItem";
     private const string STACKABLE_GRID_PREFAB_KEY = "StackableGridItem";
+    public KeyCode ITEM_DROP_KEY_SHORTCUT = KeyCode.R;
 
     private Dictionary<int, List<GridItem>> _items;
     void Start()
@@ -103,9 +104,13 @@ public class InventoryController : MonoBehaviour
         AddToInventory(item.GetItemReference(), true, true);
         ObjectPoolManager.Instance.RecycleObject(item.GetComponent<PoolableObjectInstance>());
     }
-    public void SendItemToTheGround(Item item)
+    public void SendItemToTheGround(GridItem _gridItem)
     {
-        PlayerPickUp.CreatePickupableItem(item);
+        Item item = _gridItem.GetItemReference();
+        for (int i = 0; i < _gridItem.GetItemCount(); i++)
+        {
+            PlayerPickUp.CreatePickupableItem(item);
+        }
     }
     bool HandleDirectEquip(Item item, bool forceEquip, out GridItem lastItem)
     {

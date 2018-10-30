@@ -73,7 +73,7 @@ public class ItemUnderTheMouse : MonoBehaviour
                     AddCurrentItemToInventory(false);
             }
         }
-        
+
     }
     public void OnBehindTheSceneClicked()
     {
@@ -94,7 +94,7 @@ public class ItemUnderTheMouse : MonoBehaviour
             Item item = _gridItem.GetItemReference();
             for (int i = 0; i < _gridItem.GetItemCount(); i++)
             {
-                Inventory.AddToInventory(item, Equip,true);
+                Inventory.AddToInventory(item, Equip, true);
             }
             ReleaseCurrentDraggedItem();
         }
@@ -102,13 +102,9 @@ public class ItemUnderTheMouse : MonoBehaviour
     public void SendItemToTheGround()
     {
         if (_gridItem != null)
-        {
-            Item item = _gridItem.GetItemReference();
-            for (int i = 0; i < _gridItem.GetItemCount(); i++)
-            {
-                Inventory.SendItemToTheGround(item);
-            }
-            ReleaseCurrentDraggedItem();
+        {      
+           Inventory.SendItemToTheGround(_gridItem);            
+           ReleaseCurrentDraggedItem();
         }
     }
     public bool IsAnythingClicked()
@@ -119,6 +115,6 @@ public class ItemUnderTheMouse : MonoBehaviour
         }
         else
             return false;
-            
-                }
+
+    }
 }
