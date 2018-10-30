@@ -5,8 +5,21 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
 
-    //private List<Item> _items;
-    // private Dictionary<int, List<GridItem>> _items;
+    #region SingletonPattern
+    private static InventoryController _instance;
+    public static InventoryController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<InventoryController>();
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
     public InventoryUI InventoryUI;
     private EquipmentController EquipmentController;
     private PlayerPickUpHandler PlayerPickUp;
@@ -22,15 +35,27 @@ public class InventoryController : MonoBehaviour
         _items = new Dictionary<int, List<GridItem>>();
     }
 
-    public void AddToInventory(Item item, bool AutoEquip)
+    public void AddToInventory(Item item, bool AutoEquip, bool ForceEquip = false)
     {
         if (AutoEquip)
         {
             if (item.Equipment != Item.EquipmentCategory.NotEquippable)
             {
-                //If we can directly equip the item, we dont store it into inventory
-                if (HandleDirectEquip(item))
+                GridItem lastItem;
+                if (HandleDirectEquip(item, ForceEquip, out lastItem))
+                {
+                    if (lastItem != null)
+                    {
+                        AddToInventory(lastItem.GetItemReference(), false, false);
+                        ObjectPoolManager.Instance.RecycleObject(lastItem.GetComponent<PoolableObjectInstance>());
+                    }
                     return;
+
+                }
+                else
+                {
+                }
+
             }
         }
         if (item.Stacking == Item.Stackability.Stackable)
@@ -69,16 +94,26 @@ public class InventoryController : MonoBehaviour
                 _items.Remove(item.GetItemReference().Id);
             }
         }
-        EquipmentController.RemoveItem(item.GetItemReference());
+        //EquipmentController.RemoveItem(item.GetItemReference());
 
+    }
+    public void ForceEquipItem(GridItem item)
+    {
+        RemoveItemFromInventory(item);
+        AddToInventory(item.GetItemReference(), true, true);
+        ObjectPoolManager.Instance.RecycleObject(item.GetComponent<PoolableObjectInstance>());
     }
     public void SendItemToTheGround(Item item)
     {
         PlayerPickUp.CreatePickupableItem(item);
     }
-    bool HandleDirectEquip(Item item)
+    bool HandleDirectEquip(Item item, bool forceEquip, out GridItem lastItem)
     {
-        return EquipmentController.AddItemToSlot(item);
+        EquipmentController.Equipment equipment;
+        bool result = EquipmentController.AddItemToSlot(item, forceEquip, out equipment);
+        lastItem = equipment.EquipedItem;
+        return result;
+
     }
     void AddNewGridItem(Item item, bool stackable)
     {
@@ -93,7 +128,7 @@ public class InventoryController : MonoBehaviour
             gItem = ObjectPoolManager.Instance.GetObject<StackableGridItem>(STACKABLE_GRID_PREFAB_KEY);
         }
 
-        InventoryUI.AddNewGridItem(gItem,item);
+        InventoryUI.AddNewGridItem(gItem, item);
 
         if (_items.ContainsKey(item.Id))
         {
@@ -109,6 +144,7 @@ public class InventoryController : MonoBehaviour
         }
 
     }
-    
+   
+
 
 }

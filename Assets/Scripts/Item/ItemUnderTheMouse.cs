@@ -9,6 +9,8 @@ public class ItemUnderTheMouse : MonoBehaviour
     public InventoryUI InventoryUI;
     public EquipmentUI EquipmentUI;
     public InventoryController Inventory;
+    public EquipmentController Equipment;
+
     #region SingletonPattern
     private static ItemUnderTheMouse _instance;
     public static ItemUnderTheMouse Instance
@@ -39,7 +41,10 @@ public class ItemUnderTheMouse : MonoBehaviour
     {
         _gridItem = item;
         InventoryUI.SetEventPanelActive(true);
-        Inventory.RemoveItemFromInventory(_gridItem);
+        if (item.GetContainedPanel() is InventoryUI)
+            Inventory.RemoveItemFromInventory(_gridItem);
+        else
+            Equipment.RemoveItem(item.GetItemReference());
     }
 
     public GridItem GetCurrentDragedItem()
@@ -89,7 +94,7 @@ public class ItemUnderTheMouse : MonoBehaviour
             Item item = _gridItem.GetItemReference();
             for (int i = 0; i < _gridItem.GetItemCount(); i++)
             {
-                Inventory.AddToInventory(item, Equip);
+                Inventory.AddToInventory(item, Equip,true);
             }
             ReleaseCurrentDraggedItem();
         }
@@ -106,5 +111,14 @@ public class ItemUnderTheMouse : MonoBehaviour
             ReleaseCurrentDraggedItem();
         }
     }
-
+    public bool IsAnythingClicked()
+    {
+        if (_gridItem != null)
+        {
+            return true;
+        }
+        else
+            return false;
+            
+                }
 }

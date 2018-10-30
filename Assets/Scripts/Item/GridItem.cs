@@ -59,9 +59,30 @@ public class GridItem : ItemBehaviour, IPointerClickHandler {
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        if (_state == State.Grounded)
-            GoIntoTheAir();
-      
+        if (ItemUnderTheMouse.Instance.IsAnythingClicked())
+        {
+            ItemUnderTheMouse.Instance.AddCurrentItemToInventory(true);
+            //InventoryController.Instance.ForceEquipItem(this);
+
+            // GoIntoTheAir();
+
+        }
+        else
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (_state == State.Grounded)
+                    GoIntoTheAir();
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                InventoryController.Instance.ForceEquipItem(this);
+            }
+        }
+       
+
+
+
     }
     public GeneralPanel GetContainedPanel()
     {
