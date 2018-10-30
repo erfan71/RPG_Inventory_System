@@ -7,8 +7,9 @@ using UnityEngine.EventSystems;
 public class GridItem : ItemBehaviour, IPointerClickHandler {
 
     public Image GridIcon;
-    private Vector2 defaultScale;
     private GeneralPanel parentPanel;
+    protected int _currentNumber;
+
     private enum State
     {
         InTheAir,
@@ -20,10 +21,14 @@ public class GridItem : ItemBehaviour, IPointerClickHandler {
         base.Setup(item);
         SetImage();
         _state = State.Grounded;
-        defaultScale = transform.localScale;
         parentPanel = GetComponentInParent<GeneralPanel>();
         GetComponent<Image>().raycastTarget = true;
+        _currentNumber = 1;
 
+    }
+    public int GetItemCount()
+    {
+        return _currentNumber;
     }
     private void SetImage()
     {
@@ -57,6 +62,10 @@ public class GridItem : ItemBehaviour, IPointerClickHandler {
         if (_state == State.Grounded)
             GoIntoTheAir();
       
+    }
+    public GeneralPanel GetContainedPanel()
+    {
+        return parentPanel;
     }
    
 }

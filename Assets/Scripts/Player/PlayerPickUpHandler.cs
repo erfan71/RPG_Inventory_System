@@ -25,10 +25,18 @@ public class PlayerPickUpHandler : MonoBehaviour
     public const float OVERLAP_RADIUS = 0.5f;
     public const float CIRCLE_CAST_DISTANCE = 0.25f;
     public const string PICKUPABLE_ITEM_LAYER = "PickupableLayer";
+    public const string PICKUPABLE_ITEM_PREFAB_KEY = "PickupableItem";
 
-    public InventoryController InventoryContrtoller;
+    private Vector2 _pickupScale = new Vector2(0.75f, 0.75f);
+
+    private InventoryController InventoryContrtoller;
+    private PlayerMovement PlayerMovement;
+    public Transform PickupableObjectsParent;
     void Start()
     {
+        InventoryContrtoller = GetComponent<InventoryController>();
+        PlayerMovement = GetComponent<PlayerMovement>();
+
         ChangeStrategy(PickupStrategyMethodName);
     }
     private void OnDestroy()
@@ -40,8 +48,17 @@ public class PlayerPickUpHandler : MonoBehaviour
     private void OnItemPickedUpCallBack(PickupableObject obj)
     {
         Debug.Log("Item PickedUp: " + obj.GetItemName());
-        InventoryContrtoller.AddToInventory(obj.GetItemReference());
+        InventoryContrtoller.AddToInventory(obj.GetItemReference(),true);
         DestroyImmediate(obj.gameObject);
+    }
+    public void CreatePickupableItem(Item item)
+    {
+        PickupableObject tempPickupable= ObjectPoolManager.Instance.GetObject<PickupableObject>(PICKUPABLE_ITEM_PREFAB_KEY);
+        tempPickupable.ItemId = item.Id;
+        tempPickupable.transform.position = PlayerMovement.GetPosition();
+        tempPickupable.transform.Translate(1, 0, 0);
+        tempPickupable.transform.parent = PickupableObjectsParent;
+        tempPickupable.transform.localScale = _pickupScale;
     }
 
     void Update()

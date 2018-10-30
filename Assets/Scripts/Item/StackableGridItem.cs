@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class StackableGridItem : GridItem
 {
     public Text StackNumber;
-    private int _currentNumber;
     private int _maxNumber;
     
     public override void Setup(Item item)
@@ -14,7 +13,7 @@ public class StackableGridItem : GridItem
         base.Setup(item);
         _maxNumber =ItemsDatabaseBahaviour.Instance.GetItemTypeMaxStackCount(_item.ItemType);
         SetImage();
-        SetCurrentNubmber(1);
+        SetCurrentNubmber(_currentNumber);
     }
     private void SetImage()
     {
@@ -36,9 +35,6 @@ public class StackableGridItem : GridItem
         else
             return false;
     }
-    public int GetItemCount()
-    {
-        return _currentNumber;
-    }
+   
 
 }

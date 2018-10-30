@@ -40,6 +40,13 @@ MonoBehaviour:
     Consuming: 1
     ItemType: 2
     Name: Ring
+  - Id: 4
+    Image: {fileID: 21300000, guid: f268001640d4b6a428e10fddde503e8d, type: 3}
+    Equipment: 7
+    Stacking: 0
+    Consuming: 0
+    ItemType: 3
+    Name: Health
   TypesStackMax:
   - Type: 0
     Max: 1000

@@ -52,20 +52,26 @@ public class EquipmentController : MonoBehaviour {
             return false;
         }
     }
+    public void RemoveItem(Item item)
+    {
+        if (GetSlotState(item.Equipment) == SlotState.Equiped)
+        {
+            UnEquipItem(item);
+        }
+        else
+        {
+        }
+    }
+    private void UnEquipItem(Item item)
+    {
+        Equipments[item.Equipment] = new Equipment(SlotState.NotEquiped, null);
+    }
     private void EquipItem(Item item)
     {
         GridItem gItem= ObjectPoolManager.Instance.GetObject<GridItem>(GRID_PREFAB_KEY);
         EquipmentUI.AddNewGridItem(gItem, item);
 
-        if (Equipments.ContainsKey(item.Equipment))
-        {
-
-        }
-        else
-        {
-
-        }
-
+       
         Equipments[item.Equipment]=new Equipment(SlotState.Equiped,item);
 
     }

@@ -49,7 +49,7 @@ public class EquipmentUI : GeneralPanel {
         _medalRoot = ChildsRoot.Find(MEDAL_CHILD_NAME);
 
     }
-    public void AddNewGridItem(GridItem gItem, Item item)
+    public override  void AddNewGridItem(GridItem gItem, Item item)
     {
 
         Vector3 beforeScale = gItem.transform.localScale;

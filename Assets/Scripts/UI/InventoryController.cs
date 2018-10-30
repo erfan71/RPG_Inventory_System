@@ -8,26 +8,31 @@ public class InventoryController : MonoBehaviour
     //private List<Item> _items;
     // private Dictionary<int, List<GridItem>> _items;
     public InventoryUI InventoryUI;
-    public EquipmentController EquipmentController;
-
+    private EquipmentController EquipmentController;
+    private PlayerPickUpHandler PlayerPickUp;
     private const string GRID_PREFAB_KEY = "GridItem";
     private const string STACKABLE_GRID_PREFAB_KEY = "StackableGridItem";
 
     private Dictionary<int, List<GridItem>> _items;
     void Start()
     {
+        EquipmentController = GetComponent<EquipmentController>();
+        PlayerPickUp = GetComponent<PlayerPickUpHandler>();
+
         _items = new Dictionary<int, List<GridItem>>();
     }
 
-    public void AddToInventory(Item item)
+    public void AddToInventory(Item item, bool AutoEquip)
     {
-        if (item.Equipment != Item.EquipmentCategory.NotEquippable)
+        if (AutoEquip)
         {
-            //If we can directly equip the item, we dont store it into inventory
-            if (HandleDirectEquip(item))
-                return;
+            if (item.Equipment != Item.EquipmentCategory.NotEquippable)
+            {
+                //If we can directly equip the item, we dont store it into inventory
+                if (HandleDirectEquip(item))
+                    return;
+            }
         }
-
         if (item.Stacking == Item.Stackability.Stackable)
         {
             if (_items.ContainsKey(item.Id))
@@ -52,6 +57,24 @@ public class InventoryController : MonoBehaviour
         {
             AddNewGridItem(item, false);
         }
+    }
+    public void RemoveItemFromInventory(GridItem item)
+    {
+        if (_items.ContainsKey(item.GetItemReference().Id))
+        {
+            List<GridItem> stackableItems = _items[item.GetItemReference().Id];
+            stackableItems.Remove(item);
+            if (stackableItems.Count == 0)
+            {
+                _items.Remove(item.GetItemReference().Id);
+            }
+        }
+        EquipmentController.RemoveItem(item.GetItemReference());
+
+    }
+    public void SendItemToTheGround(Item item)
+    {
+        PlayerPickUp.CreatePickupableItem(item);
     }
     bool HandleDirectEquip(Item item)
     {

@@ -68,5 +68,11 @@ public class GeneralPanel : MonoBehaviour {
         _state = PopUpState.Closed;
         OnOpenCloseActionCallBack?.Invoke(this);
     }
-    
+    public virtual void AddNewGridItem(GridItem gItem, Item item)
+    {
+
+    }
+
+
+
 }

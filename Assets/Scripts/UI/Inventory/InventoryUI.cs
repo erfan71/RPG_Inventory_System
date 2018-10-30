@@ -10,7 +10,7 @@ public class InventoryUI : GeneralPanel
     private void Awake()
     {
     }
-    public void AddNewGridItem(GridItem gItem, Item item)
+    public override void AddNewGridItem(GridItem gItem, Item item)
     {  
         gItem.transform.SetParent(GridRoot);
         gItem.transform.localScale = Vector3.one;
@@ -21,10 +21,8 @@ public class InventoryUI : GeneralPanel
         PanelEventDetector.raycastTarget = enable;
     }
     public void OnPanelClicked()
-    {
-       GridItem gItem= ItemUnderTheMouse.Instance.GetCurrentDragedItem();
-        AddNewGridItem(gItem, gItem.GetItemReference());
-        ItemUnderTheMouse.Instance.ReleaseCurrentDraggedItem();
+    { 
+        ItemUnderTheMouse.Instance.AddCurrentItemToInventory(false);
     }
     
 

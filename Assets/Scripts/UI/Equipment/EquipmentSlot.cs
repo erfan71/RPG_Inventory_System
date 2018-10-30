@@ -14,8 +14,9 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
 
         if (gridItem.GetItemReference().Equipment == EquipmentType)
         {
-            EquipmentUI.Instance.AddNewGridItem(gridItem, gridItem.GetItemReference());
-            ItemUnderTheMouse.Instance.ReleaseCurrentDraggedItem();
+          //  EquipmentUI.Instance.AddNewGridItem(gridItem, gridItem.GetItemReference());
+           // ItemUnderTheMouse.Instance.ReleaseCurrentDraggedItem();
+            ItemUnderTheMouse.Instance.AddCurrentItemToInventory(true);
         }
         else
         {

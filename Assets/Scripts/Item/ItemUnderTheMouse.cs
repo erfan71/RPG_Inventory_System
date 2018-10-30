@@ -7,6 +7,8 @@ public class ItemUnderTheMouse : MonoBehaviour
 
     private GridItem _gridItem;
     public InventoryUI InventoryUI;
+    public EquipmentUI EquipmentUI;
+    public InventoryController Inventory;
     #region SingletonPattern
     private static ItemUnderTheMouse _instance;
     public static ItemUnderTheMouse Instance
@@ -23,10 +25,21 @@ public class ItemUnderTheMouse : MonoBehaviour
 
     #endregion
 
+    private void Start()
+    {
+        InventoryUI.OnOpenCloseActionCallBack += OnPanelOpenCloseActionCallBack;
+        EquipmentUI.OnOpenCloseActionCallBack += OnPanelOpenCloseActionCallBack;
+    }
+    private void OnDestroy()
+    {
+        InventoryUI.OnOpenCloseActionCallBack -= OnPanelOpenCloseActionCallBack;
+        EquipmentUI.OnOpenCloseActionCallBack -= OnPanelOpenCloseActionCallBack;
+    }
     public void SetCurrentDragedItem(GridItem item)
     {
         _gridItem = item;
         InventoryUI.SetEventPanelActive(true);
+        Inventory.RemoveItemFromInventory(_gridItem);
     }
 
     public GridItem GetCurrentDragedItem()
@@ -36,9 +49,62 @@ public class ItemUnderTheMouse : MonoBehaviour
     }
     public void ReleaseCurrentDraggedItem()
     {
-        _gridItem = null;
         InventoryUI.SetEventPanelActive(false);
+        ObjectPoolManager.Instance.RecycleObject(_gridItem.GetComponent<PoolableObjectInstance>());
+        _gridItem = null;
 
+
+    }
+    private void OnPanelOpenCloseActionCallBack(GeneralPanel panel)
+    {
+        //
+        if (InventoryUI.State == GeneralPanel.PopUpState.Closed && EquipmentUI.State == GeneralPanel.PopUpState.Closed)
+        {
+            if (_gridItem != null)
+            {
+                if (_gridItem.GetContainedPanel() is EquipmentUI)
+                    AddCurrentItemToInventory(true);
+                else
+                    AddCurrentItemToInventory(false);
+            }
+        }
+        
+    }
+    public void OnBehindTheSceneClicked()
+    {
+        if
+            ((InventoryUI.State == GeneralPanel.PopUpState.Closed && EquipmentUI.State == GeneralPanel.PopUpState.Opened) ||
+             (InventoryUI.State == GeneralPanel.PopUpState.Opened && EquipmentUI.State == GeneralPanel.PopUpState.Closed))
+        {
+            if (_gridItem != null)
+            {
+                SendItemToTheGround();
+            }
+        }
+    }
+    public void AddCurrentItemToInventory(bool Equip)
+    {
+        if (_gridItem != null)
+        {
+            Item item = _gridItem.GetItemReference();
+            for (int i = 0; i < _gridItem.GetItemCount(); i++)
+            {
+                Inventory.AddToInventory(item, Equip);
+            }
+            ReleaseCurrentDraggedItem();
+        }
+    }
+    public void SendItemToTheGround()
+    {
+        if (_gridItem != null)
+        {
+            Item item = _gridItem.GetItemReference();
+            for (int i = 0; i < _gridItem.GetItemCount(); i++)
+            {
+                Inventory.SendItemToTheGround(item);
+            }
+            ReleaseCurrentDraggedItem();
+        }
     }
 
 }
