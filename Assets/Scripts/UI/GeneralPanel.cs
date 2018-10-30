@@ -8,6 +8,7 @@ public class GeneralPanel : MonoBehaviour {
     public Button OpenButton;
     public Button CloseButton;
     public GameObject PanelRoot;
+    public GameObject CanvasRoot;
     public KeyCode KeyBoardShortCut;
     public System.Action<GeneralPanel> OnOpenCloseActionCallBack;
     public Text Title;
@@ -67,4 +68,5 @@ public class GeneralPanel : MonoBehaviour {
         _state = PopUpState.Closed;
         OnOpenCloseActionCallBack?.Invoke(this);
     }
+    
 }

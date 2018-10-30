@@ -5,6 +5,22 @@ using UnityEngine.UI;
 
 public class EquipmentUI : GeneralPanel {
 
+    #region SingletonPattern
+    private static EquipmentUI _instance;
+    public static EquipmentUI Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<EquipmentUI>();
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
+
     private Transform _helmetRoot;
     private Transform _primaryWeaponRoot;
     private Transform _secondaryWeaponRoot;
@@ -33,11 +49,12 @@ public class EquipmentUI : GeneralPanel {
         _medalRoot = ChildsRoot.Find(MEDAL_CHILD_NAME);
 
     }
-    public void AddNewGridItem(GridItem gItem)
+    public void AddNewGridItem(GridItem gItem, Item item)
     {
+
         Vector3 beforeScale = gItem.transform.localScale;
         Transform selectedParent = null;
-        switch (gItem.GetItemReference().Equipment)
+        switch (item.Equipment)
         {
             case Item.EquipmentCategory.PrimaryWeapon:
                 selectedParent = _primaryWeaponRoot;
@@ -76,6 +93,7 @@ public class EquipmentUI : GeneralPanel {
         rect.pivot= new Vector2(0.5f, 0.5f);
         rect.anchoredPosition = new Vector2(0, 0);
         rect.sizeDelta = selectedParent.GetComponent<RectTransform>().sizeDelta;
+        gItem.Setup(item);
 
     }
 }

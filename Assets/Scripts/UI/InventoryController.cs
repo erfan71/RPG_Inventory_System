@@ -69,8 +69,8 @@ public class InventoryController : MonoBehaviour
         {
             gItem = ObjectPoolManager.Instance.GetObject<StackableGridItem>(STACKABLE_GRID_PREFAB_KEY);
         }
-        gItem.Setup(item);
-        InventoryUI.AddNewGridItem(gItem);
+
+        InventoryUI.AddNewGridItem(gItem,item);
 
         if (_items.ContainsKey(item.Id))
         {

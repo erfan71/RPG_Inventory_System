@@ -55,8 +55,7 @@ public class EquipmentController : MonoBehaviour {
     private void EquipItem(Item item)
     {
         GridItem gItem= ObjectPoolManager.Instance.GetObject<GridItem>(GRID_PREFAB_KEY);
-        gItem.Setup(item);
-        EquipmentUI.AddNewGridItem(gItem);
+        EquipmentUI.AddNewGridItem(gItem, item);
 
         if (Equipments.ContainsKey(item.Equipment))
         {

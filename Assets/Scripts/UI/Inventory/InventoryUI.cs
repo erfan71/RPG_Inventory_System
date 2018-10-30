@@ -6,17 +6,26 @@ using UnityEngine.UI;
 public class InventoryUI : GeneralPanel
 {
     public Transform GridRoot;
-
-   
-
+    public Image PanelEventDetector;
     private void Awake()
     {
     }
-    public void AddNewGridItem(GridItem gItem)
+    public void AddNewGridItem(GridItem gItem, Item item)
     {  
-        Vector3 beforeScale = gItem.transform.localScale;
         gItem.transform.SetParent(GridRoot);
-        gItem.transform.localScale = beforeScale;      
+        gItem.transform.localScale = Vector3.one;
+        gItem.Setup(item);
     }
-   
+    public void SetEventPanelActive(bool enable)
+    {
+        PanelEventDetector.raycastTarget = enable;
+    }
+    public void OnPanelClicked()
+    {
+       GridItem gItem= ItemUnderTheMouse.Instance.GetCurrentDragedItem();
+        AddNewGridItem(gItem, gItem.GetItemReference());
+        ItemUnderTheMouse.Instance.ReleaseCurrentDraggedItem();
+    }
+    
+
 }
