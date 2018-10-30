@@ -24,15 +24,22 @@ MonoBehaviour:
     Equipment: 1
     Stacking: 1
     Consuming: 1
-    ItemType: 0
+    ItemType: 2
     Name: Golden Sheild
   - Id: 2
     Image: {fileID: 21300000, guid: 64c53faadd9c7434bb2991752d8733ab, type: 3}
-    Equipment: 4
+    Equipment: 7
     Stacking: 0
     Consuming: 0
     ItemType: 1
     Name: Red Pepper
+  - Id: 3
+    Image: {fileID: 21300000, guid: 8084bf0f68d25a94c97a8bf0eb5437f3, type: 3}
+    Equipment: 6
+    Stacking: 1
+    Consuming: 1
+    ItemType: 2
+    Name: Ring
   TypesStackMax:
   - Type: 0
     Max: 1000
@@ -40,3 +47,5 @@ MonoBehaviour:
     Max: 2
   - Type: 3
     Max: 5
+  - Type: 2
+    Max: 1

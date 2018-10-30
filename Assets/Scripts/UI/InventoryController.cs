@@ -8,7 +8,7 @@ public class InventoryController : MonoBehaviour
     //private List<Item> _items;
     // private Dictionary<int, List<GridItem>> _items;
     public InventoryUI InventoryUI;
-
+    public EquipmentController EquipmentController;
 
     private const string GRID_PREFAB_KEY = "GridItem";
     private const string STACKABLE_GRID_PREFAB_KEY = "StackableGridItem";
@@ -21,6 +21,13 @@ public class InventoryController : MonoBehaviour
 
     public void AddToInventory(Item item)
     {
+        if (item.Equipment != Item.EquipmentCategory.NotEquippable)
+        {
+            //If we can directly equip the item, we dont store it into inventory
+            if (HandleDirectEquip(item))
+                return;
+        }
+
         if (item.Stacking == Item.Stackability.Stackable)
         {
             if (_items.ContainsKey(item.Id))
@@ -46,7 +53,10 @@ public class InventoryController : MonoBehaviour
             AddNewGridItem(item, false);
         }
     }
-
+    bool HandleDirectEquip(Item item)
+    {
+        return EquipmentController.AddItemToSlot(item);
+    }
     void AddNewGridItem(Item item, bool stackable)
     {
         GridItem gItem;

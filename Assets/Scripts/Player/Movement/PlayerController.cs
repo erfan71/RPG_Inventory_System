@@ -15,17 +15,17 @@ public class PlayerController : MonoBehaviour {
 
     private void OnPanelOpenCloseActionCallBack(GeneralPanel panel)
     {
-        if (panel.State == GeneralPanel.PopUpState.Opened)
-        {
-            if (panel is InventoryUI)
-            {
-                EquipmentPanel.ClosePanel();
-            }
-            else if (panel is EquipmentUI)
-            {
-                InventroyPanel.ClosePanel();
-            }
-        }
+        //if (panel.State == GeneralPanel.PopUpState.Opened)
+        //{
+        //    if (panel is InventoryUI)
+        //    {
+        //        EquipmentPanel.ClosePanel();
+        //    }
+        //    else if (panel is EquipmentUI)
+        //    {
+        //        InventroyPanel.ClosePanel();
+        //    }
+        //}
     }
 
     

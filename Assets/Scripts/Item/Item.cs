@@ -10,7 +10,10 @@ public class Item {
         PrimaryWeapon,
         SecondaryWeapon,
         Helmet,
-        Torse,
+        Shoes,
+        Medal,
+        Amulet,
+        Ring,
         NotEquippable
     }
     public enum Stackability
@@ -27,7 +30,7 @@ public class Item {
     {
         Coin,
         Food,
-        Weapon,
+        Weapon_Equiable,
         Poition
     }
 
