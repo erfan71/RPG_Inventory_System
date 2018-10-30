@@ -76,7 +76,16 @@ public class GridItem : ItemBehaviour, IPointerClickHandler {
             }
             else if (eventData.button == PointerEventData.InputButton.Right)
             {
-                InventoryController.Instance.ForceEquipItem(this);
+                if (EquipmentController.Instance.IsItemEquiped(this))
+                {
+                    EquipmentController.Instance.RemoveItem(this.GetItemReference());
+                    InventoryController.Instance.AddToInventory(this.GetItemReference(), false);
+                    ObjectPoolManager.Instance.RecycleObject(this.GetComponent<PoolableObjectInstance>());
+                }
+                else
+                {
+                    InventoryController.Instance.ForceEquipItem(this);
+                }
             }
         }
        

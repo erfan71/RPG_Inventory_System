@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class EquipmentController : MonoBehaviour
 {
+    #region SingletonPattern
+    private static EquipmentController _instance;
+    public static EquipmentController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<EquipmentController>();
+            }
+            return _instance;
+        }
+    }
+
+    #endregion
 
     public EquipmentUI EquipmentUI;
     public enum SlotState
@@ -94,6 +109,17 @@ public class EquipmentController : MonoBehaviour
 
         Equipments[item.Equipment] = new Equipment(SlotState.Equiped, gItem);
         return Equipments[item.Equipment];
+    }
+    public bool IsItemEquiped(GridItem item)
+    {
+        if (Equipments.ContainsKey(item.GetItemReference().Equipment))
+        {
+            if (item== Equipments[item.GetItemReference().Equipment].EquipedItem)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
