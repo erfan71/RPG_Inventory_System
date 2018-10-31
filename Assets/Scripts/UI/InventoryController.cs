@@ -38,6 +38,7 @@ public class InventoryController : MonoBehaviour
 
     public void AddToInventory(Item item, bool AutoEquip, bool ForceEquip = false)
     {
+
         if (AutoEquip)
         {
             if (item.Equipment != Item.EquipmentCategory.NotEquippable)

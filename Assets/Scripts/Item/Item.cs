@@ -38,6 +38,11 @@ public class Item {
         Limited,
         Unlimited
     }
+    public enum PickUpType
+    {
+        Pickupable,
+        PermanentUsage
+    }
 
     public int Id;
     public Sprite Image;
@@ -45,6 +50,8 @@ public class Item {
     public Stackability Stacking;
     public Consumability Consuming;
     public Type ItemType;
+    public PickUpType PickupType;
+
     public string Name;
 
 }

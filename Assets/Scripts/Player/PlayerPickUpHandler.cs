@@ -48,7 +48,14 @@ public class PlayerPickUpHandler : MonoBehaviour
     private void OnItemPickedUpCallBack(PickupableObject obj)
     {
         Debug.Log("Item PickedUp: " + obj.GetItemName());
-        InventoryContrtoller.AddToInventory(obj.GetItemReference(),true);
+
+        Item item = obj.GetItemReference();
+        if (item.PickupType==Item.PickUpType.Pickupable)
+        InventoryContrtoller.AddToInventory(item, true);
+        else
+        {
+            Debug.Log("It's a Permanent Usage Item");
+        }
         DestroyImmediate(obj.gameObject);
     }
     public void CreatePickupableItem(Item item)
