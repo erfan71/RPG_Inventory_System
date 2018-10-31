@@ -29,6 +29,7 @@ public class GeneralPanel : MonoBehaviour {
     }
     void Start()
     {
+        Debug.Log(name);
         OpenButton.onClick.AddListener(() => OnOpenClicked());
         CloseButton.onClick.AddListener(() => OnCloseClicked());
         _state = PopUpState.Closed;
@@ -56,14 +57,14 @@ public class GeneralPanel : MonoBehaviour {
     }
     public void OpenPanel()
     {
-        OpenButton.gameObject.SetActive(false);
+        SetOpenButtonActive(false);
         PanelRoot.SetActive(true);
         _state = PopUpState.Opened;
         OnOpenCloseActionCallBack?.Invoke(this);
     }
     public void ClosePanel()
     {
-        OpenButton.gameObject.SetActive(true);
+        SetOpenButtonActive(true);
         PanelRoot.SetActive(false);
         _state = PopUpState.Closed;
         OnOpenCloseActionCallBack?.Invoke(this);
@@ -71,6 +72,10 @@ public class GeneralPanel : MonoBehaviour {
     public virtual void AddNewGridItem(GridItem gItem, Item item)
     {
 
+    }
+    public void SetOpenButtonActive(bool active)
+    {
+        OpenButton.gameObject.SetActive(active);
     }
 
 

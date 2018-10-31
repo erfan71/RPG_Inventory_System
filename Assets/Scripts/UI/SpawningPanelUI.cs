@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpawningPanelUI : MonoBehaviour {
+public class SpawningPanelUI : GeneralPanel {
 
     public PlayerPickUpHandler PickupableManager;
 
@@ -16,7 +16,7 @@ public class SpawningPanelUI : MonoBehaviour {
     public Button CoinButton;
     public Button PoitionButton;
 
-	void Start () {
+	void Awake () {
 
         PrimaryButton.onClick.AddListener(() => PickupableManager.SpawnItem(Item.Type.Weapon_Equiable,Item.EquipmentCategory.PrimaryWeapon));
         SecondaryButton.onClick.AddListener(() => PickupableManager.SpawnItem(Item.Type.Weapon_Equiable, Item.EquipmentCategory.SecondaryWeapon));
@@ -29,8 +29,5 @@ public class SpawningPanelUI : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+
 }
