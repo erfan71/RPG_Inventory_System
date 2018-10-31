@@ -94,4 +94,16 @@ public class PlayerPickUpHandler : MonoBehaviour
 
         _currentSelectedStrategyName = newStrategyName;
     }
+
+
+    public void OnSpawnPanelItemClicked(int EquipmentCategory)
+    {
+        SpawnEquipmentItem((Item.EquipmentCategory)EquipmentCategory);
+    }
+    public void SpawnEquipmentItem(Item.EquipmentCategory equipType)
+    {
+        Item item= ItemsDatabaseBahaviour.Instance.GetAnEquipmentItem(equipType);
+
+        CreatePickupableItem(item);
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
     private bool isSetuped;
     private ItemsDatabase _itemsdDatabase;
 
+    private Dictionary<Item.EquipmentCategory, List<Item>> _equipmentItems;
 
     private void Awake()
     {
@@ -36,9 +38,24 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
         if (!isSetuped)
         {
             _itemsDictionary = new Dictionary<int, Item>();
+            _equipmentItems = new Dictionary<Item.EquipmentCategory, List<Item>>();
             foreach (Item item in _itemsdDatabase.Items)
             {
                 _itemsDictionary.Add(item.Id, item);
+
+                if (item.Equipment != Item.EquipmentCategory.NotEquippable)
+                {
+                    if (_equipmentItems.ContainsKey(item.Equipment))
+                    {
+                       List<Item> currentITems=  _equipmentItems[item.Equipment];
+                        currentITems.Add(item);
+                        _equipmentItems[item.Equipment] = currentITems;
+                    }
+                    else
+                    {
+                        _equipmentItems.Add(item.Equipment, new List<Item>() { item });
+                    }
+                }
             }
             _itemTypesMaxDic = new Dictionary<Item.Type, int>();
             foreach (ItemsDatabase.TypeMaxStack item in _itemsdDatabase.TypesStackMax)
@@ -46,6 +63,8 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
                 if (item.Limitation==Item.MaxType.Limited)
                     _itemTypesMaxDic.Add(item.Type, item.Max);
             }
+            
+
             isSetuped = true;
         }
 
@@ -77,5 +96,16 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
         }
         else
             return -1;
+    }
+
+    public Item GetAnEquipmentItem(Item.EquipmentCategory equipType)
+    {
+        System.Random random = new System.Random();
+      
+        List<Item> itemsOFType = _equipmentItems[equipType];
+        Item selectedItem= itemsOFType[random.Next(itemsOFType.Count)];
+
+        return selectedItem;
+
     }
 }
