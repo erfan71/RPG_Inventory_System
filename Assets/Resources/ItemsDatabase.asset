@@ -12,80 +12,88 @@ MonoBehaviour:
   m_Name: ItemsDatabase
   m_EditorClassIdentifier: 
   Items:
-  - Id: 0
+  - Name: Mace
+    Id: 0
     Image: {fileID: 21300000, guid: c29b1ec07852851409385f99b15115b1, type: 3}
     Equipment: 0
     Stacking: 1
     Consuming: 1
     ItemType: 2
     PickupType: 0
-    Name: Mace
-  - Id: 1
+  - Name: Golden Sheild
+    Id: 1
     Image: {fileID: 21300000, guid: 30a4ca4371ed226438da38cba31762fc, type: 3}
     Equipment: 1
     Stacking: 1
     Consuming: 1
     ItemType: 2
     PickupType: 0
-    Name: Golden Sheild
-  - Id: 2
+  - Name: Red Pepper
+    Id: 2
     Image: {fileID: 21300000, guid: 64c53faadd9c7434bb2991752d8733ab, type: 3}
     Equipment: 7
     Stacking: 0
     Consuming: 0
     ItemType: 1
-    PickupType: 0
-    Name: Red Pepper
-  - Id: 3
+    PickupType: 1
+  - Name: Ring 1
+    Id: 3
     Image: {fileID: 21300000, guid: 8084bf0f68d25a94c97a8bf0eb5437f3, type: 3}
     Equipment: 6
     Stacking: 1
     Consuming: 1
     ItemType: 2
     PickupType: 0
-    Name: Ring 1
-  - Id: 4
+  - Name: Health
+    Id: 4
     Image: {fileID: 21300000, guid: f268001640d4b6a428e10fddde503e8d, type: 3}
     Equipment: 7
     Stacking: 0
     Consuming: 0
     ItemType: 3
     PickupType: 0
-    Name: Health
-  - Id: 5
+  - Name: Ring 2
+    Id: 5
     Image: {fileID: 21300000, guid: f7fedd2ce5e688343b93a08cde38cb04, type: 3}
     Equipment: 6
     Stacking: 1
     Consuming: 1
     ItemType: 2
     PickupType: 1
-    Name: Ring 2
-  - Id: 6
+  - Name: Helmet 1
+    Id: 6
     Image: {fileID: 21300000, guid: 7d504eb31cc11ae478f824ba520e2bd8, type: 3}
     Equipment: 2
     Stacking: 1
     Consuming: 1
     ItemType: 2
     PickupType: 0
-    Name: Helmet 1
-  - Id: 7
+  - Name: Shoes 1
+    Id: 7
     Image: {fileID: 21300000, guid: 6ab9f8b21a214b74ba8014b0231ba183, type: 3}
     Equipment: 3
     Stacking: 1
     Consuming: 1
     ItemType: 2
     PickupType: 0
-    Name: Shoes 1
+  - Name: Gold Coin
+    Id: 8
+    Image: {fileID: 21300000, guid: 5f772eca702448e48848c062af95b294, type: 3}
+    Equipment: 7
+    Stacking: 0
+    Consuming: 1
+    ItemType: 0
+    PickupType: 0
   TypesStackMax:
   - Type: 0
     Limitation: 1
-    Max: 1000
+    Max: -1
   - Type: 1
     Limitation: 1
     Max: -1
   - Type: 3
     Limitation: 0
-    Max: 5
+    Max: 2
   - Type: 2
     Limitation: 0
     Max: 1

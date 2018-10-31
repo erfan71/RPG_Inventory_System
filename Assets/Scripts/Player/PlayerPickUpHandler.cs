@@ -26,6 +26,7 @@ public class PlayerPickUpHandler : MonoBehaviour
     public const float CIRCLE_CAST_DISTANCE = 0.25f;
     public const string PICKUPABLE_ITEM_LAYER = "PickupableLayer";
     public const string PICKUPABLE_ITEM_PREFAB_KEY = "PickupableItem";
+    private const float PICKUPABLE_ITEM_GENERATION_RADIUS = 5.0f;
 
     private Vector2 _pickupScale = new Vector2(0.75f, 0.75f);
 
@@ -58,12 +59,13 @@ public class PlayerPickUpHandler : MonoBehaviour
         }
         DestroyImmediate(obj.gameObject);
     }
-    public void CreatePickupableItem(Item item)
+    public void CreatePickupableItem(Item item, float distance=1)
     {
         PickupableObject tempPickupable= ObjectPoolManager.Instance.GetObject<PickupableObject>(PICKUPABLE_ITEM_PREFAB_KEY);
         tempPickupable.ItemId = item.Id;
         tempPickupable.transform.position = PlayerMovement.GetPosition();
-        tempPickupable.transform.Translate(1, 0, 0);
+        Vector2 randomePoint= UnityEngine.Random.insideUnitCircle* distance;
+        tempPickupable.transform.Translate(randomePoint);
         tempPickupable.transform.parent = PickupableObjectsParent;
         tempPickupable.transform.localScale = _pickupScale;
     }
@@ -96,14 +98,11 @@ public class PlayerPickUpHandler : MonoBehaviour
     }
 
 
-    public void OnSpawnPanelItemClicked(int EquipmentCategory)
+ 
+    public void SpawnItem(Item.Type itemType, Item.EquipmentCategory equipType)
     {
-        SpawnEquipmentItem((Item.EquipmentCategory)EquipmentCategory);
-    }
-    public void SpawnEquipmentItem(Item.EquipmentCategory equipType)
-    {
-        Item item= ItemsDatabaseBahaviour.Instance.GetAnEquipmentItem(equipType);
+        Item item = ItemsDatabaseBahaviour.Instance.GetAnItem(equipType, itemType);
 
-        CreatePickupableItem(item);
+        CreatePickupableItem(item, UnityEngine.Random.Range(2, PICKUPABLE_ITEM_GENERATION_RADIUS));
     }
 }

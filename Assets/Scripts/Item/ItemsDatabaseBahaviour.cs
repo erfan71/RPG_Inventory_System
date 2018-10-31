@@ -25,7 +25,7 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
     private bool isSetuped;
     private ItemsDatabase _itemsdDatabase;
 
-    private Dictionary<Item.EquipmentCategory, List<Item>> _equipmentItems;
+    private Dictionary<Item.Type, List<Item>> _equipmentItems;
 
     private void Awake()
     {
@@ -38,24 +38,23 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
         if (!isSetuped)
         {
             _itemsDictionary = new Dictionary<int, Item>();
-            _equipmentItems = new Dictionary<Item.EquipmentCategory, List<Item>>();
+            _equipmentItems = new Dictionary<Item.Type, List<Item>>();
             foreach (Item item in _itemsdDatabase.Items)
             {
                 _itemsDictionary.Add(item.Id, item);
 
-                if (item.Equipment != Item.EquipmentCategory.NotEquippable)
-                {
-                    if (_equipmentItems.ContainsKey(item.Equipment))
+               
+                    if (_equipmentItems.ContainsKey(item.ItemType))
                     {
-                       List<Item> currentITems=  _equipmentItems[item.Equipment];
+                       List<Item> currentITems=  _equipmentItems[item.ItemType];
                         currentITems.Add(item);
-                        _equipmentItems[item.Equipment] = currentITems;
+                        _equipmentItems[item.ItemType] = currentITems;
                     }
                     else
                     {
-                        _equipmentItems.Add(item.Equipment, new List<Item>() { item });
+                        _equipmentItems.Add(item.ItemType, new List<Item>() { item });
                     }
-                }
+                
             }
             _itemTypesMaxDic = new Dictionary<Item.Type, int>();
             foreach (ItemsDatabase.TypeMaxStack item in _itemsdDatabase.TypesStackMax)
@@ -98,14 +97,23 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
             return -1;
     }
 
-    public Item GetAnEquipmentItem(Item.EquipmentCategory equipType)
+    public Item GetAnItem(Item.EquipmentCategory equipType, Item.Type itemType)
     {
+        //It is not a very optimized solution. we can easily cash "selectedItems" too. But currently, we suppose there are not many Item.
         System.Random random = new System.Random();
       
-        List<Item> itemsOFType = _equipmentItems[equipType];
-        Item selectedItem= itemsOFType[random.Next(itemsOFType.Count)];
+        List<Item> itemsOFType = _equipmentItems[itemType];
+        List<Item> selectedItems = new List<Item>();
+        foreach( Item item in itemsOFType)
+        {
+            if (item.Equipment== equipType)
+            {
+                selectedItems.Add(item);
+            }
+        }
+        Item selectedItem= selectedItems[random.Next(selectedItems.Count)];
 
         return selectedItem;
-
     }
+   
 }

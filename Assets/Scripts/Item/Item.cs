@@ -43,7 +43,7 @@ public class Item {
         Pickupable,
         PermanentUsage
     }
-
+    public string Name;
     public int Id;
     public Sprite Image;
     public EquipmentCategory Equipment;
@@ -52,6 +52,5 @@ public class Item {
     public Type ItemType;
     public PickUpType PickupType;
 
-    public string Name;
 
 }
