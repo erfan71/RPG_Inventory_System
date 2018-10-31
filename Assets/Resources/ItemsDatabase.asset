@@ -56,10 +56,14 @@ MonoBehaviour:
     Name: Ring 2
   TypesStackMax:
   - Type: 0
+    Limitation: 1
     Max: 1000
   - Type: 1
-    Max: 2
+    Limitation: 1
+    Max: -1
   - Type: 3
+    Limitation: 0
     Max: 5
   - Type: 2
+    Limitation: 0
     Max: 1

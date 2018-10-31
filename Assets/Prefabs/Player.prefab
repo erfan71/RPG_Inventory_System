@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114512809675611812}
   - component: {fileID: 114748387320033712}
   - component: {fileID: 114073034470209568}
+  - component: {fileID: 114514516911164094}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -152,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86daac5ddeedbb641a846333fa54f9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InventoryUI: {fileID: 0}
+  ITEM_DROP_KEY_SHORTCUT: 114
 --- !u!114 &114226254463735088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,8 +189,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e51f1b35ca2fce4193e0d4e30fd26f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickupStrategyMethodName: 3
-  InventoryContrtoller: {fileID: 114073034470209568}
+  PickupStrategyMethodName: 2
+  PickupableObjectsParent: {fileID: 0}
+--- !u!114 &114514516911164094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855439210458454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3be74727769bfd4b8ce2e4c6d2fc25f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EquipmentUI: {fileID: 0}
 --- !u!114 &114541882494341060
 MonoBehaviour:
   m_ObjectHideFlags: 1

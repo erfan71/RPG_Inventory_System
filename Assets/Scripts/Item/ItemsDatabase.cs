@@ -11,7 +11,9 @@ public class ItemsDatabase : ScriptableObject {
     public struct TypeMaxStack
     {
         public Item.Type Type;
+        public Item.MaxType Limitation;
         public int Max;
+        
     }
     public List<TypeMaxStack> TypesStackMax;
 }

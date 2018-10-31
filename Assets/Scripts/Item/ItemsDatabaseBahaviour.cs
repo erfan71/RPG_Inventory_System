@@ -43,7 +43,8 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
             _itemTypesMaxDic = new Dictionary<Item.Type, int>();
             foreach (ItemsDatabase.TypeMaxStack item in _itemsdDatabase.TypesStackMax)
             {
-                _itemTypesMaxDic.Add(item.Type, item.Max);
+                if (item.Limitation==Item.MaxType.Limited)
+                    _itemTypesMaxDic.Add(item.Type, item.Max);
             }
             isSetuped = true;
         }
@@ -70,6 +71,11 @@ public class ItemsDatabaseBahaviour : MonoBehaviour
     }
     public int GetItemTypeMaxStackCount(Item.Type type)
     {
-       return  _itemTypesMaxDic[type];
+        if (_itemTypesMaxDic.ContainsKey(type))
+        {
+            return _itemTypesMaxDic[type];
+        }
+        else
+            return -1;
     }
 }

@@ -4055,35 +4055,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1901469433 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1855439210458454, guid: 4fea7f5225000fc44aea1341de79b8ec,
+--- !u!114 &1901469434 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114514516911164094, guid: 4fea7f5225000fc44aea1341de79b8ec,
     type: 2}
   m_PrefabInternal: {fileID: 2140578520}
---- !u!114 &1901469434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1901469433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3be74727769bfd4b8ce2e4c6d2fc25f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EquipmentUI: {fileID: 433563712}
 --- !u!114 &1901469435 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
     type: 2}
   m_PrefabInternal: {fileID: 2140578520}
   m_Script: {fileID: 11500000, guid: 86daac5ddeedbb641a846333fa54f9fa, type: 3}
---- !u!114 &1901469437 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
-    type: 2}
-  m_PrefabInternal: {fileID: 2140578520}
-  m_Script: {fileID: 11500000, guid: 2e51f1b35ca2fce4193e0d4e30fd26f0, type: 3}
 --- !u!1001 &1941557284
 Prefab:
   m_ObjectHideFlags: 0
@@ -4502,6 +4485,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
+        type: 2}
+      propertyPath: PickupableObjectsParent
+      value: 
+      objectReference: {fileID: 1625473907}
+    - target: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
+        type: 2}
+      propertyPath: InventoryUI
+      value: 
+      objectReference: {fileID: 1135670255}
     - target: {fileID: 114748387320033712, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
       propertyPath: InventroyPanel
@@ -4512,36 +4505,11 @@ Prefab:
       propertyPath: EquipmentPanel
       value: 
       objectReference: {fileID: 433563712}
-    - target: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
+    - target: {fileID: 114514516911164094, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
-      propertyPath: InventoryUI
+      propertyPath: EquipmentUI
       value: 
-      objectReference: {fileID: 1135670255}
-    - target: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: EquipmentController
-      value: 
-      objectReference: {fileID: 1901469434}
-    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PickupStrategyMethodName
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PlayerPickUp
-      value: 
-      objectReference: {fileID: 1901469437}
-    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PlayerMovement
-      value: 
-      objectReference: {fileID: 1094562523}
-    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PickupableObjectsParent
-      value: 
-      objectReference: {fileID: 1625473907}
+      objectReference: {fileID: 433563712}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fea7f5225000fc44aea1341de79b8ec, type: 2}
   m_IsPrefabAsset: 0

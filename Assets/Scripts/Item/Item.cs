@@ -33,6 +33,11 @@ public class Item {
         Weapon_Equiable,
         Poition
     }
+    public enum MaxType
+    {
+        Limited,
+        Unlimited
+    }
 
     public int Id;
     public Sprite Image;

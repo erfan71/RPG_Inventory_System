@@ -22,7 +22,16 @@ public class StackableGridItem : GridItem
     public void SetCurrentNubmber(int number)
     {
         string numberTxt = string.Empty;
-        numberTxt = number.ToString() + " / " + _maxNumber.ToString();
+        if (_maxNumber == -1)//Unlimited
+        {
+            numberTxt = number.ToString();
+
+        }
+        else
+        {
+            numberTxt = number.ToString() + " / " + _maxNumber.ToString();
+
+        }
         StackNumber.text = numberTxt;
         _currentNumber = number;
     }
