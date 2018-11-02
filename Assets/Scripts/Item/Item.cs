@@ -51,6 +51,7 @@ public class Item {
     public Consumability Consuming;
     public Type ItemType;
     public PickUpType PickupType;
+    public List<ItemAttribute> Attributes;
 
 
 }

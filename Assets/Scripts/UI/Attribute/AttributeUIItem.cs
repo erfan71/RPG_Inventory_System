@@ -41,6 +41,15 @@ public class AttributeUIItem : MonoBehaviour {
     {
         _attribute = attr;
         _name.text = attr.Name;
-        _value.text = attr.Value.ToString("0.##");
+        SetProperValue(attr.Value);
+    }
+    private void SetProperValue(float value)
+    {
+        _value.text = value.ToString("0.##");
+
+    }
+    public void SetValue(float value)
+    {
+        SetProperValue(value);
     }
 }

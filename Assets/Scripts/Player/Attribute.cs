@@ -22,6 +22,14 @@ public class Attribute {
             return _maxValue;
         }
     }
+    private int _minValue;
+    public int MinValue
+    {
+        get
+        {
+            return _minValue;
+        }
+    }
     private string _name;
     public string Name
     {
@@ -31,11 +39,17 @@ public class Attribute {
         }
     }
 
-    public Attribute(PlayerAttributes.AttributeType type, float defaultValue, int maxValue, string name)
+    public Attribute(PlayerAttributes.AttributeType type, float defaultValue, int maxValue, int minValue, string name)
     {
         _value = defaultValue;
         _maxValue = maxValue;
         _name = name;
+        Type = type;
+        _minValue = minValue;
+    }
+    public void AddValue(float value)
+    {
+        _value = Mathf.Clamp(_value + value, _minValue, _maxValue);
     }
 
 

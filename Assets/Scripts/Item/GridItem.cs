@@ -82,16 +82,24 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
             }
             else if (eventData.button == PointerEventData.InputButton.Right)
             {
-                if (EquipmentController.Instance.IsItemEquiped(this))
+                if (_item.Equipment != Item.EquipmentCategory.NotEquippable)
                 {
-                    EquipmentController.Instance.RemoveItem(this.GetItemReference());
-                    InventoryController.Instance.AddToInventory(this.GetItemReference(), false);
-                    ObjectPoolManager.Instance.RecycleObject(this.GetComponent<PoolableObjectInstance>());
+                    if (EquipmentController.Instance.IsItemEquiped(this))
+                    {
+                        EquipmentController.Instance.RemoveItem(this.GetItemReference());
+                        InventoryController.Instance.AddToInventory(this.GetItemReference(), false);
+                        ObjectPoolManager.Instance.RecycleObject(this.GetComponent<PoolableObjectInstance>());
+                    }
+                    else
+                    {
+                        InventoryController.Instance.ForceEquipItem(this);
+                    }
                 }
                 else
                 {
-                    InventoryController.Instance.ForceEquipItem(this);
+                    Debug.LogError("Not Equipable");
                 }
+                
             }
         }
 

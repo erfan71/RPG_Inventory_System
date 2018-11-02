@@ -24,6 +24,11 @@ public class AttributeUI : GeneralPanel {
         attributeUIItem.SetAttribute(attr);
         AttributeUIItems.Add(attr, attributeUIItem);
     }
+    public void UpdateAttributeUIItemValue(Attribute attr)
+    {
+        AttributeUIItem uIItem= AttributeUIItems[attr];
+        uIItem.SetValue(attr.Value);
+    }
 
 
 }

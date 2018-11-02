@@ -6831,6 +6831,11 @@ Prefab:
       propertyPath: AttributePanel
       value: 
       objectReference: {fileID: 1789841507}
+    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
+        type: 2}
+      propertyPath: PlayerAttributes
+      value: 
+      objectReference: {fileID: 641069081}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fea7f5225000fc44aea1341de79b8ec, type: 2}
   m_IsPrefabAsset: 0

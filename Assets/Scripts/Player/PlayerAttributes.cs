@@ -6,31 +6,49 @@ public class PlayerAttributes : MonoBehaviour {
 
     public enum AttributeType
     {
-        Strength,
-        Dexterity,
+        Attack,
+        Defence,
         Agility,
-        Intelligence
+        Luck,
+        Mana,
+        Health
     }
-    public Attribute Strength;
-    public Attribute Dexterity;
+    public Attribute Attack;
+    public Attribute Defence;
     public Attribute Agility;
-    public Attribute Intelligence;
+    public Attribute Luck;
+    public Attribute Mana;
+    public Attribute Health;
 
     public AttributeUI _attributeUI;
     private void Start()
     {
-        Strength = new Attribute(AttributeType.Strength, 10.565f, 100, "Strength");
-        Dexterity = new Attribute(AttributeType.Dexterity, 10, 100, "Dexterity");
-        Agility = new Attribute(AttributeType.Agility, 10, 100, "Agility");
-        Intelligence = new Attribute(AttributeType.Intelligence, 10, 100, "Intelligence");
+        Attack = new Attribute(AttributeType.Attack, 10.565f, 100,-100, AttributeType.Attack.ToString());
+        Defence = new Attribute(AttributeType.Defence, 10, 100,-100, AttributeType.Defence.ToString());
+        Agility = new Attribute(AttributeType.Agility, 10, 100,-100, AttributeType.Agility.ToString());
+        Luck = new Attribute(AttributeType.Luck, 10, 100,-100, AttributeType.Luck.ToString());
+        Mana = new Attribute(AttributeType.Mana, 50, 100,0, AttributeType.Mana.ToString());
+        Health = new Attribute(AttributeType.Health, 50, 100,0, AttributeType.Health.ToString());
 
         _attributeUI.Setup();
 
-        _attributeUI.AddAttributeUIItem(Strength);
-        _attributeUI.AddAttributeUIItem(Dexterity);
+        _attributeUI.AddAttributeUIItem(Health);
+        _attributeUI.AddAttributeUIItem(Mana);
+        _attributeUI.AddAttributeUIItem(Attack);
+        _attributeUI.AddAttributeUIItem(Defence);
         _attributeUI.AddAttributeUIItem(Agility);
-        _attributeUI.AddAttributeUIItem(Intelligence);
+        _attributeUI.AddAttributeUIItem(Luck);
+    }
 
+    public void EffectAttribute(List<ItemAttribute> item)
+    {
+        foreach(ItemAttribute itemAtt in item)
+        {
+            Attribute attr = (Attribute)this.GetType().GetField(itemAtt.Type.ToString()).GetValue(this);
+            attr.AddValue(itemAtt.EffectValue);
+            _attributeUI.UpdateAttributeUIItemValue(attr);
+        }
+       
     }
 
 }

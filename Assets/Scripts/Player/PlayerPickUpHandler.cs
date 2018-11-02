@@ -33,6 +33,7 @@ public class PlayerPickUpHandler : MonoBehaviour
     private InventoryController InventoryContrtoller;
     private PlayerMovement PlayerMovement;
     public Transform PickupableObjectsParent;
+    public PlayerAttributes PlayerAttributes;
     void Start()
     {
         InventoryContrtoller = GetComponent<InventoryController>();
@@ -51,20 +52,25 @@ public class PlayerPickUpHandler : MonoBehaviour
         Debug.Log("Item PickedUp: " + obj.GetItemName());
 
         Item item = obj.GetItemReference();
-        if (item.PickupType==Item.PickUpType.Pickupable)
-        InventoryContrtoller.AddToInventory(item, true);
+        if (item.PickupType == Item.PickUpType.Pickupable)
+            InventoryContrtoller.AddToInventory(item, true);
         else
         {
             Debug.Log("It's a Permanent Usage Item");
+            ConsumeItem(item);
         }
         DestroyImmediate(obj.gameObject);
     }
-    public void CreatePickupableItem(Item item, float distance=1)
+    void ConsumeItem(Item item)
     {
-        PickupableObject tempPickupable= ObjectPoolManager.Instance.GetObject<PickupableObject>(PICKUPABLE_ITEM_PREFAB_KEY);
+        PlayerAttributes.EffectAttribute(item.Attributes);
+    }
+    public void CreatePickupableItem(Item item, float distance = 1)
+    {
+        PickupableObject tempPickupable = ObjectPoolManager.Instance.GetObject<PickupableObject>(PICKUPABLE_ITEM_PREFAB_KEY);
         tempPickupable.ItemId = item.Id;
         tempPickupable.transform.position = PlayerMovement.GetPosition();
-        Vector2 randomePoint= UnityEngine.Random.insideUnitCircle* distance;
+        Vector2 randomePoint = UnityEngine.Random.insideUnitCircle * distance;
         tempPickupable.transform.Translate(randomePoint);
         tempPickupable.transform.parent = PickupableObjectsParent;
         tempPickupable.transform.localScale = _pickupScale;
@@ -98,7 +104,7 @@ public class PlayerPickUpHandler : MonoBehaviour
     }
 
 
- 
+
     public void SpawnItem(Item.Type itemType, Item.EquipmentCategory equipType)
     {
         Item item = ItemsDatabaseBahaviour.Instance.GetAnItem(equipType, itemType);
