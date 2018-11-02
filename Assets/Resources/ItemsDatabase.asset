@@ -59,7 +59,7 @@ MonoBehaviour:
     Stacking: 1
     Consuming: 1
     ItemType: 2
-    PickupType: 1
+    PickupType: 0
   - Name: Helmet 1
     Id: 6
     Image: {fileID: 21300000, guid: 7d504eb31cc11ae478f824ba520e2bd8, type: 3}

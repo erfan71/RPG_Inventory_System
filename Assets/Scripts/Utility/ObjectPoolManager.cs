@@ -56,8 +56,13 @@ public class ObjectPoolManager : MonoBehaviour
             objInstance.SetActive(false);
             objInstance.transform.SetParent(this.transform);
             objInstance.name = obj.Prefab.name;
-            objInstance.AddComponent<PoolableObjectInstance>();
             PoolableObjectInstance poolableRef = objInstance.GetComponent<PoolableObjectInstance>();
+
+            if (poolableRef == null)
+            {
+                objInstance.AddComponent<PoolableObjectInstance>();
+                poolableRef = objInstance.GetComponent<PoolableObjectInstance>();
+            }
             poolableRef.Key = obj.Key;
             poolableRef.UseStatus = PoolableObjectInstance.UsageStatus.Ready;
             objects.Add(objInstance);

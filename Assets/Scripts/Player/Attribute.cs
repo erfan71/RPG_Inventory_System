@@ -22,12 +22,20 @@ public class Attribute {
             return _maxValue;
         }
     }
+    private string _name;
+    public string Name
+    {
+        get
+        {
+            return _name;
+        }
+    }
 
-
-    public Attribute(PlayerAttributes.AttributeType type, float defaultValue, int maxValue)
+    public Attribute(PlayerAttributes.AttributeType type, float defaultValue, int maxValue, string name)
     {
         _value = defaultValue;
         _maxValue = maxValue;
+        _name = name;
     }
 
 
