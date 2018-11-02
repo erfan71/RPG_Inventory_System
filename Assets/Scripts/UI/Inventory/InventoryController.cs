@@ -31,9 +31,10 @@ public class InventoryController : MonoBehaviour
     public PlayerAttributes PlayerAttributes;
 
    
-    public void ConsumeItem(List<ItemAttribute> attributes)
+    public void ConsumeItem(Item item)
     {
-        PlayerAttributes.EnableAttribute(attributes);
+        
+        PlayerAttributes.EnableAttribute(item);
         Debug.Log("Item Cosumed");
     }
     public void ConsumeGridItem(GridItem item)
@@ -46,7 +47,7 @@ public class InventoryController : MonoBehaviour
             
             stkRef.SetCurrentNubmber(currentNumber);
             
-            ConsumeItem(item.GetItemReference().Attributes);
+            ConsumeItem(item.GetItemReference());
             if (currentNumber==0)
              RemoveItemFromInventory(item,true);
 
@@ -54,7 +55,7 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            ConsumeItem(item.GetItemReference().Attributes);
+            ConsumeItem(item.GetItemReference());
             RemoveItemFromInventory(item,true);
         }
     }

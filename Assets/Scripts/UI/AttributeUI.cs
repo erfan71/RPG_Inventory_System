@@ -5,7 +5,21 @@ using UnityEngine.UI;
 
 public class AttributeUI : GeneralPanel {
 
+    #region SingletonPattern
+    private static AttributeUI _instance;
+    public static AttributeUI Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<AttributeUI>();
+            }
+            return _instance;
+        }
+    }
 
+    #endregion
     private const string ATTRIBUTE_UI_ITEM_PREFAB_KEY = "AttributeUIItem";
     public Transform AttributeUIItemsParent;
 

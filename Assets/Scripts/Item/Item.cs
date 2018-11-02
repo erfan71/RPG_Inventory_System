@@ -43,6 +43,13 @@ public class Item {
         Pickupable,
         PermanentUsage
     }
+    public enum ConsumeType
+    {
+        Permanent,
+        HoldOverTime,
+        RampOverTime,
+        ChangeOverTime
+    }
     public string Name;
     public int Id;
     public Sprite Image;
@@ -52,6 +59,12 @@ public class Item {
     public Type ItemType;
     public PickUpType PickupType;
     public List<ItemAttribute> Attributes;
+    [Header("consumable items")]
+
+    public ConsumeType AttributeConsumeType;
+   
+    public float FixDuration;
+    public float RampDuration;
 
 
 }

@@ -23,7 +23,7 @@ public class PlayerAttributes : MonoBehaviour {
     public AttributeUI _attributeUI;
     private void Start()
     {
-        Attack = new Attribute(AttributeType.Attack, 10.565f, 100,-100, AttributeType.Attack.ToString());
+        Attack = new Attribute(AttributeType.Attack, 10, 100,-100, AttributeType.Attack.ToString());
         Defence = new Attribute(AttributeType.Defence, 10, 100,-100, AttributeType.Defence.ToString());
         Agility = new Attribute(AttributeType.Agility, 10, 100,-100, AttributeType.Agility.ToString());
         Luck = new Attribute(AttributeType.Luck, 10, 100,-100, AttributeType.Luck.ToString());
@@ -40,14 +40,46 @@ public class PlayerAttributes : MonoBehaviour {
         _attributeUI.AddAttributeUIItem(Luck);
     }
 
-    public void EnableAttribute(List<ItemAttribute> item)
+    public void EnableAttribute(Item item)
     {
-        foreach(ItemAttribute itemAtt in item)
+        if (item.AttributeConsumeType != Item.ConsumeType.Permanent)
         {
-            Attribute attr = (Attribute)this.GetType().GetField(itemAtt.Type.ToString()).GetValue(this);
-            attr.AddValue(itemAtt.EffectValue);
-            _attributeUI.UpdateAttributeUIItemValue(attr);
+            if (item.AttributeConsumeType == Item.ConsumeType.ChangeOverTime)
+            {
+                foreach (ItemAttribute itemAtt in item.Attributes)
+                {
+                    Attribute attr = (Attribute)this.GetType().GetField(itemAtt.Type.ToString()).GetValue(this);
+                    attr.AddValuePerSecond(itemAtt.EffectValue,item.FixDuration);
+                }
+            }
+            else if (item.AttributeConsumeType == Item.ConsumeType.HoldOverTime)
+            {
+                foreach (ItemAttribute itemAtt in item.Attributes)
+                {
+                    Attribute attr = (Attribute)this.GetType().GetField(itemAtt.Type.ToString()).GetValue(this);
+                    attr.AddValueForFixedDuration(itemAtt.EffectValue, item.FixDuration);
+                }
+            }
+            else if (item.AttributeConsumeType == Item.ConsumeType.RampOverTime)
+            {
+                foreach (ItemAttribute itemAtt in item.Attributes)
+                {
+                    Attribute attr = (Attribute)this.GetType().GetField(itemAtt.Type.ToString()).GetValue(this);
+                    attr.AddValueOverTimeWithHolding(itemAtt.EffectValue,item.RampDuration,item.FixDuration);
+                }
+            }
+            
         }
+        else
+        {
+            foreach (ItemAttribute itemAtt in item.Attributes)
+            {
+                Attribute attr = (Attribute)this.GetType().GetField(itemAtt.Type.ToString()).GetValue(this);
+                attr.AddValue(itemAtt.EffectValue);
+                _attributeUI.UpdateAttributeUIItemValue(attr);
+            }
+        }
+       
        
     }
     public void DisableAttribute(List<ItemAttribute> item)

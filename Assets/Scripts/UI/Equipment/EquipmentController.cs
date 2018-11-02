@@ -108,7 +108,7 @@ public class EquipmentController : MonoBehaviour
 
         Equipments[item.Equipment] = new Equipment(SlotState.Equiped, gItem);
 
-        PlayerAttributes.EnableAttribute(item.Attributes);
+        PlayerAttributes.EnableAttribute(item);
 
         return Equipments[item.Equipment];
     }

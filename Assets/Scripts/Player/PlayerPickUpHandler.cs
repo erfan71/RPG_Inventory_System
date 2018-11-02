@@ -56,7 +56,7 @@ public class PlayerPickUpHandler : MonoBehaviour
         else
         {
             Debug.Log("It's a Permanent Usage Item");
-            InventoryContrtoller.ConsumeItem(item.Attributes);
+            InventoryContrtoller.ConsumeItem(item);
         }
         DestroyImmediate(obj.gameObject);
     }

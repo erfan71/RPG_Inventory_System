@@ -25,6 +25,9 @@ MonoBehaviour:
       EffectValue: 10
     - Type: 2
       EffectValue: -2
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
   - Name: Golden Sheild
     Id: 1
     Image: {fileID: 21300000, guid: 30a4ca4371ed226438da38cba31762fc, type: 3}
@@ -38,6 +41,9 @@ MonoBehaviour:
       EffectValue: 20
     - Type: 2
       EffectValue: -1
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
   - Name: Red Pepper
     Id: 2
     Image: {fileID: 21300000, guid: 64c53faadd9c7434bb2991752d8733ab, type: 3}
@@ -49,6 +55,11 @@ MonoBehaviour:
     Attributes:
     - Type: 5
       EffectValue: 5
+    - Type: 4
+      EffectValue: 5
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
   - Name: Ring 1
     Id: 3
     Image: {fileID: 21300000, guid: 8084bf0f68d25a94c97a8bf0eb5437f3, type: 3}
@@ -60,6 +71,9 @@ MonoBehaviour:
     Attributes:
     - Type: 3
       EffectValue: 10
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
   - Name: Health Poition
     Id: 4
     Image: {fileID: 21300000, guid: f268001640d4b6a428e10fddde503e8d, type: 3}
@@ -70,7 +84,10 @@ MonoBehaviour:
     PickupType: 0
     Attributes:
     - Type: 5
-      EffectValue: 20
+      EffectValue: 2
+    AttributeConsumeType: 3
+    FixDuration: 5
+    RampDuration: 0
   - Name: Ring 2
     Id: 5
     Image: {fileID: 21300000, guid: f7fedd2ce5e688343b93a08cde38cb04, type: 3}
@@ -82,6 +99,9 @@ MonoBehaviour:
     Attributes:
     - Type: 3
       EffectValue: 20
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
   - Name: Helmet 1
     Id: 6
     Image: {fileID: 21300000, guid: 7d504eb31cc11ae478f824ba520e2bd8, type: 3}
@@ -93,6 +113,9 @@ MonoBehaviour:
     Attributes:
     - Type: 1
       EffectValue: 5
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
   - Name: Shoes 1
     Id: 7
     Image: {fileID: 21300000, guid: 6ab9f8b21a214b74ba8014b0231ba183, type: 3}
@@ -106,6 +129,9 @@ MonoBehaviour:
       EffectValue: 10
     - Type: 1
       EffectValue: 5
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
   - Name: Gold Coin
     Id: 8
     Image: {fileID: 21300000, guid: 5f772eca702448e48848c062af95b294, type: 3}
@@ -115,7 +141,10 @@ MonoBehaviour:
     ItemType: 0
     PickupType: 0
     Attributes: []
-  - Name: Mana Poition
+    AttributeConsumeType: 0
+    FixDuration: 0
+    RampDuration: 0
+  - Name: Attack Poition
     Id: 9
     Image: {fileID: 21300000, guid: ed16acabc7e44c240a14b964d7bfcd47, type: 3}
     Equipment: 7
@@ -124,8 +153,25 @@ MonoBehaviour:
     ItemType: 3
     PickupType: 0
     Attributes:
-    - Type: 4
-      EffectValue: 20
+    - Type: 0
+      EffectValue: 50
+    AttributeConsumeType: 2
+    FixDuration: 5
+    RampDuration: 5
+  - Name: LuckPoition
+    Id: 10
+    Image: {fileID: 21300000, guid: e795a0fc71118554b888e5a4cabc6f33, type: 3}
+    Equipment: 7
+    Stacking: 0
+    Consuming: 0
+    ItemType: 3
+    PickupType: 0
+    Attributes:
+    - Type: 3
+      EffectValue: 10
+    AttributeConsumeType: 1
+    FixDuration: 10
+    RampDuration: 0
   TypesStackMax:
   - Type: 0
     Limitation: 1
