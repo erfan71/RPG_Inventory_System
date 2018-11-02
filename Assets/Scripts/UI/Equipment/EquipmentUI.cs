@@ -52,7 +52,7 @@ public class EquipmentUI : GeneralPanel {
     public override  void AddNewGridItem(GridItem gItem, Item item)
     {
 
-        Vector3 beforeScale = gItem.transform.localScale;
+        //Vector3 beforeScale = gItem.transform.localScale;
         Transform selectedParent = null;
         switch (item.Equipment)
         {
@@ -85,7 +85,7 @@ public class EquipmentUI : GeneralPanel {
                 break;
         }
         gItem.transform.SetParent(selectedParent);
-        gItem.transform.localScale = beforeScale;
+        gItem.transform.localScale = Vector3.one;
 
         RectTransform rect = gItem.GetComponent<RectTransform>();
         rect.anchorMin = new Vector2(0.5f, 0.5f);

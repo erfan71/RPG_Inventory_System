@@ -40,7 +40,7 @@ public class PlayerAttributes : MonoBehaviour {
         _attributeUI.AddAttributeUIItem(Luck);
     }
 
-    public void EffectAttribute(List<ItemAttribute> item)
+    public void EnableAttribute(List<ItemAttribute> item)
     {
         foreach(ItemAttribute itemAtt in item)
         {
@@ -49,6 +49,16 @@ public class PlayerAttributes : MonoBehaviour {
             _attributeUI.UpdateAttributeUIItemValue(attr);
         }
        
+    }
+    public void DisableAttribute(List<ItemAttribute> item)
+    {
+        foreach (ItemAttribute itemAtt in item)
+        {
+            Attribute attr = (Attribute)this.GetType().GetField(itemAtt.Type.ToString()).GetValue(this);
+            attr.SubtractValue(itemAtt.EffectValue);
+            _attributeUI.UpdateAttributeUIItemValue(attr);
+        }
+
     }
 
 }

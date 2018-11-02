@@ -51,6 +51,9 @@ public class Attribute {
     {
         _value = Mathf.Clamp(_value + value, _minValue, _maxValue);
     }
-
+    public void SubtractValue(float value)
+    {
+        _value = Mathf.Clamp(_value - value, _minValue, _maxValue);
+    }
 
 }

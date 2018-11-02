@@ -22,7 +22,7 @@ public class PlayerPickUpHandler : MonoBehaviour
 
     public const string PICKUPABLE_ITEM_TAG = "Pickupable";
     public const float MIN_DISTANCE_TO_PICKUPABLE = 1;
-    public const float OVERLAP_RADIUS = 0.5f;
+    public const float OVERLAP_RADIUS = 0.25f;
     public const float CIRCLE_CAST_DISTANCE = 0.25f;
     public const string PICKUPABLE_ITEM_LAYER = "PickupableLayer";
     public const string PICKUPABLE_ITEM_PREFAB_KEY = "PickupableItem";
@@ -63,7 +63,7 @@ public class PlayerPickUpHandler : MonoBehaviour
     }
     void ConsumeItem(Item item)
     {
-        PlayerAttributes.EffectAttribute(item.Attributes);
+        PlayerAttributes.EnableAttribute(item.Attributes);
     }
     public void CreatePickupableItem(Item item, float distance = 1)
     {

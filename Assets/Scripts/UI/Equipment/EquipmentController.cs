@@ -21,6 +21,8 @@ public class EquipmentController : MonoBehaviour
     #endregion
 
     public EquipmentUI EquipmentUI;
+    public PlayerAttributes PlayerAttributes;
+    
     public enum SlotState
     {
         Equiped,
@@ -68,7 +70,7 @@ public class EquipmentController : MonoBehaviour
         {
             if (replace)
             {
-                Equipment lastEq = UnEquipItem(item.Equipment);
+                Equipment lastEq = UnEquipItem(item);
                 EquipItem(item);
                 lastEquipment = lastEq;
                 return true;
@@ -92,22 +94,22 @@ public class EquipmentController : MonoBehaviour
     {
         Equipment lastEq = Equipments[item.Equipment];
         Equipments[item.Equipment] = new Equipment(SlotState.NotEquiped, null);
-        return lastEq;
-    }
-    private Equipment UnEquipItem(Item.EquipmentCategory category)
-    {
-        Equipment lastEq = Equipments[category];
-        Equipments[category] = new Equipment(SlotState.NotEquiped, null);
-        return lastEq;
 
+        PlayerAttributes.DisableAttribute(item.Attributes);
+
+
+        return lastEq;
     }
+   
     private Equipment EquipItem(Item item)
     {
         GridItem gItem = ObjectPoolManager.Instance.GetObject<GridItem>(GRID_PREFAB_KEY);
         EquipmentUI.AddNewGridItem(gItem, item);
 
-
         Equipments[item.Equipment] = new Equipment(SlotState.Equiped, gItem);
+
+        PlayerAttributes.EnableAttribute(item.Attributes);
+
         return Equipments[item.Equipment];
     }
     public bool IsItemEquiped(GridItem item)

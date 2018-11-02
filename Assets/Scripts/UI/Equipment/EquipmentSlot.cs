@@ -12,23 +12,27 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
     {
         GridItem gridItem = ItemUnderTheMouse.Instance.GetCurrentDragedItem();
 
-        if (gridItem.GetItemReference().Equipment == EquipmentType)
+        if (gridItem != null)
         {
-          //  EquipmentUI.Instance.AddNewGridItem(gridItem, gridItem.GetItemReference());
-           // ItemUnderTheMouse.Instance.ReleaseCurrentDraggedItem();
-            ItemUnderTheMouse.Instance.AddCurrentItemToInventory(true);
-        }
-        else
-        {
-            if (gridItem.GetItemReference().Equipment == Item.EquipmentCategory.NotEquippable)
+            if (gridItem.GetItemReference().Equipment == EquipmentType)
             {
-                Debug.LogError("Not Equipable");
+                //  EquipmentUI.Instance.AddNewGridItem(gridItem, gridItem.GetItemReference());
+                // ItemUnderTheMouse.Instance.ReleaseCurrentDraggedItem();
+                ItemUnderTheMouse.Instance.AddCurrentItemToInventory(true);
             }
             else
             {
-                Debug.LogError("Not Suitable for this slot: "+ EquipmentType.ToString());
+                if (gridItem.GetItemReference().Equipment == Item.EquipmentCategory.NotEquippable)
+                {
+                    Debug.LogError("Not Equipable");
+                }
+                else
+                {
+                    Debug.LogError("Not Suitable for this slot: " + EquipmentType.ToString());
 
+                }
             }
         }
+        
     }
 }

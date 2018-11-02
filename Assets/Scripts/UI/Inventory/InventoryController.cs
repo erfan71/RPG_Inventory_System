@@ -110,7 +110,7 @@ public class InventoryController : MonoBehaviour
         Item item = _gridItem.GetItemReference();
         for (int i = 0; i < _gridItem.GetItemCount(); i++)
         {
-            PlayerPickUp.CreatePickupableItem(item);
+            PlayerPickUp.CreatePickupableItem(item, 2);
         }
     }
     bool HandleDirectEquip(Item item, bool forceEquip, out GridItem lastItem)
