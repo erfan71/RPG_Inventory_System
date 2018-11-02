@@ -11,6 +11,11 @@ public class ItemUnderTheMouse : MonoBehaviour
     public InventoryController Inventory;
     public EquipmentController Equipment;
 
+    private bool _longPressMode = false;
+
+    private const string UNDER_MOUSE_ICON_PREFAB_KEY = "UnderMouse";
+    UnderMouseItem underItem;
+    private bool _fromInventory = false;
     #region SingletonPattern
     private static ItemUnderTheMouse _instance;
     public static ItemUnderTheMouse Instance
@@ -37,14 +42,119 @@ public class ItemUnderTheMouse : MonoBehaviour
         InventoryUI.OnOpenCloseActionCallBack -= OnPanelOpenCloseActionCallBack;
         EquipmentUI.OnOpenCloseActionCallBack -= OnPanelOpenCloseActionCallBack;
     }
-    public void SetCurrentDragedItem(GridItem item)
+    public void SetCurrentDragedItem(GridItem item, bool longPressMode)
     {
         _gridItem = item;
         InventoryUI.SetEventPanelActive(true);
         if (item.GetContainedPanel() is InventoryUI)
-            Inventory.RemoveItemFromInventory(_gridItem,false);
+        {
+            _fromInventory = true;
+            Inventory.RemoveItemFromInventory(_gridItem, false);
+        }
         else
+        {
             Equipment.RemoveItem(item.GetItemReference());
+            _fromInventory = false;
+        }
+
+        underItem = ObjectPoolManager.Instance.GetObject<UnderMouseItem>(UNDER_MOUSE_ICON_PREFAB_KEY);
+        underItem.Setup(item.GetItemReference().Image);
+        underItem.transform.SetParent(InventoryUI.CanvasRoot.transform);
+        underItem.transform.localScale = Vector2.one;
+        ObjectPoolManager.Instance.RecycleObject(_gridItem.GetComponent<PoolableObjectInstance>());
+        StartCoroutine(InTheAirControl());
+        _longPressMode = longPressMode;
+
+
+    }
+    private void SetPosition(Vector2 screenPos)
+    {
+        underItem.transform.position = screenPos;
+    }
+
+
+    private IEnumerator InTheAirControl()
+    {
+        while (_gridItem != null)
+        {
+            if (Input.GetKeyDown(InventoryController.Instance.ITEM_DROP_KEY_SHORTCUT))
+            {
+                SendItemToTheGround();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                if (_longPressMode)
+                {
+                    if (_lastEnterEquipmentSlot != null)
+                    {
+                        EquipLogic();
+                    }
+                    else
+                    {
+                        if (InventoryDropped)
+                        {
+                            AddCurrentItemToInventory(false);
+
+                        }
+                        else
+                        {
+                            if (!OnBehindTheSceneClicked())
+                            {
+                                AddCurrentItemToInventory(!_fromInventory);
+
+                            }              
+                        }
+                    }
+                }
+            }
+            else
+                SetPosition(Input.mousePosition);
+            yield return null;
+        }
+    }
+    private EquipmentSlot _lastEnterEquipmentSlot;
+    private EquipmentSlot _startDraggedEquipmentSlot;
+    private bool InventoryDropped = false;
+
+    public void EnterEquipmentSlot(EquipmentSlot equipmentSlot)
+    {
+        _lastEnterEquipmentSlot = equipmentSlot;
+    }
+    public void EnterInventory()
+    {
+        InventoryDropped = true;
+    }
+    public void ExitInventory()
+    {
+        InventoryDropped = false;
+
+    }
+    public void ExitEquipmentSlot()
+    {
+        _lastEnterEquipmentSlot = null;
+    }
+
+    void EquipLogic()
+    {
+        if (_gridItem.GetItemReference().Equipment == _lastEnterEquipmentSlot.EquipmentType)
+        {
+            AddCurrentItemToInventory(true);
+        }
+        else
+        {
+            if (_gridItem.GetItemReference().Equipment == Item.EquipmentCategory.NotEquippable)
+            {
+                Debug.LogError("Not Equipable");
+                AddCurrentItemToInventory(!_fromInventory);
+
+            }
+            else
+            {
+                Debug.LogError("Not Suitable for this slot: " + _lastEnterEquipmentSlot.EquipmentType.ToString());
+                AddCurrentItemToInventory(!_fromInventory);
+
+            }
+        }
     }
 
     public GridItem GetCurrentDragedItem()
@@ -54,8 +164,10 @@ public class ItemUnderTheMouse : MonoBehaviour
     public void ReleaseCurrentDraggedItem()
     {
         InventoryUI.SetEventPanelActive(false);
-        ObjectPoolManager.Instance.RecycleObject(_gridItem.GetComponent<PoolableObjectInstance>());
+        ObjectPoolManager.Instance.RecycleObject(underItem.GetComponent<PoolableObjectInstance>());
         _gridItem = null;
+        _longPressMode = false;
+        Debug.Log("ReleaseCurrentDraggedItem");
     }
     private void OnPanelOpenCloseActionCallBack(GeneralPanel panel)
     {
@@ -70,7 +182,7 @@ public class ItemUnderTheMouse : MonoBehaviour
             }
         }
     }
-    public void OnBehindTheSceneClicked()
+    public bool OnBehindTheSceneClicked()
     {
         if
             ((InventoryUI.State == GeneralPanel.PopUpState.Closed && EquipmentUI.State == GeneralPanel.PopUpState.Opened) ||
@@ -79,8 +191,11 @@ public class ItemUnderTheMouse : MonoBehaviour
             if (_gridItem != null)
             {
                 SendItemToTheGround();
+                return true;
             }
+            return false;
         }
+        return false;
     }
     public void AddCurrentItemToInventory(bool Equip)
     {
@@ -97,9 +212,9 @@ public class ItemUnderTheMouse : MonoBehaviour
     public void SendItemToTheGround()
     {
         if (_gridItem != null)
-        {      
-           Inventory.SendItemToTheGround(_gridItem);            
-           ReleaseCurrentDraggedItem();
+        {
+            Inventory.SendItemToTheGround(_gridItem);
+            ReleaseCurrentDraggedItem();
         }
     }
     public bool IsAnythingClicked()

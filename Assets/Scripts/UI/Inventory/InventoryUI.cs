@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InventoryUI : GeneralPanel
 {
     public Transform GridRoot;
     public Image PanelEventDetector;
-    private void Awake()
-    {
-    }
+
     public override void AddNewGridItem(GridItem gItem, Item item)
     {  
         gItem.transform.SetParent(GridRoot);
@@ -21,9 +20,7 @@ public class InventoryUI : GeneralPanel
         PanelEventDetector.raycastTarget = enable;
     }
     public void OnPanelClicked()
-    { 
+    {
         ItemUnderTheMouse.Instance.AddCurrentItemToInventory(false);
     }
-    
-
 }

@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
+public class EquipmentSlot : MonoBehaviour, IPointerClickHandler , IPointerEnterHandler, IPointerExitHandler
 {
 
     private GridItem _gridItem;
     public Item.EquipmentCategory EquipmentType;
+
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    {
+        SelectLogic();
+    }
+    void SelectLogic()
     {
         GridItem gridItem = ItemUnderTheMouse.Instance.GetCurrentDragedItem();
 
@@ -16,8 +21,6 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
         {
             if (gridItem.GetItemReference().Equipment == EquipmentType)
             {
-                //  EquipmentUI.Instance.AddNewGridItem(gridItem, gridItem.GetItemReference());
-                // ItemUnderTheMouse.Instance.ReleaseCurrentDraggedItem();
                 ItemUnderTheMouse.Instance.AddCurrentItemToInventory(true);
             }
             else
@@ -33,6 +36,16 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
-        
+    }
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+    {
+        ItemUnderTheMouse.Instance.EnterEquipmentSlot(this);
+    }
+
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+    {
+        ItemUnderTheMouse.Instance.ExitEquipmentSlot();
+
     }
 }
