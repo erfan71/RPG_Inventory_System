@@ -73,7 +73,7 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
         }
         else
         {
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || INPUT_DEBUG
             if (eventData.clickCount == 2)
             {
                 if (_item.Equipment != Item.EquipmentCategory.NotEquippable)

@@ -8,18 +8,33 @@ public class PlayerInput : MonoBehaviour
 {
     private float _horizontal;
     private float _Vertical;
+
+    public Joystick Joystick;
    
     public string myString { get; set; }
 
     void Awake()
     {
+#if UNITY_ANDROID || UNITY_IOS || INPUT_DEBUG
+        _horizontal = Joystick.Horizontal;
+        _Vertical = Joystick.Vertical;
+        Joystick.gameObject.SetActive(true);
 
+#else
+        Joystick.gameObject.SetActive(false);
+#endif
     }
 
     void Update()
     {
+#if UNITY_ANDROID || UNITY_IOS || INPUT_DEBUG
+        _horizontal = Joystick.Horizontal;
+        _Vertical = Joystick.Vertical;
+#else 
         _horizontal = Input.GetAxis("Horizontal");
         _Vertical = Input.GetAxis("Vertical");
+       
+#endif
     }
     public float GetHorizontal()
     {
