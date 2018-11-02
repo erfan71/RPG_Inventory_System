@@ -42,7 +42,7 @@ public class ItemUnderTheMouse : MonoBehaviour
         _gridItem = item;
         InventoryUI.SetEventPanelActive(true);
         if (item.GetContainedPanel() is InventoryUI)
-            Inventory.RemoveItemFromInventory(_gridItem);
+            Inventory.RemoveItemFromInventory(_gridItem,false);
         else
             Equipment.RemoveItem(item.GetItemReference());
     }
@@ -50,19 +50,15 @@ public class ItemUnderTheMouse : MonoBehaviour
     public GridItem GetCurrentDragedItem()
     {
         return _gridItem;
-
     }
     public void ReleaseCurrentDraggedItem()
     {
         InventoryUI.SetEventPanelActive(false);
         ObjectPoolManager.Instance.RecycleObject(_gridItem.GetComponent<PoolableObjectInstance>());
         _gridItem = null;
-
-
     }
     private void OnPanelOpenCloseActionCallBack(GeneralPanel panel)
     {
-        //
         if (InventoryUI.State == GeneralPanel.PopUpState.Closed && EquipmentUI.State == GeneralPanel.PopUpState.Closed)
         {
             if (_gridItem != null)
@@ -73,7 +69,6 @@ public class ItemUnderTheMouse : MonoBehaviour
                     AddCurrentItemToInventory(false);
             }
         }
-
     }
     public void OnBehindTheSceneClicked()
     {
@@ -115,6 +110,5 @@ public class ItemUnderTheMouse : MonoBehaviour
         }
         else
             return false;
-
     }
 }

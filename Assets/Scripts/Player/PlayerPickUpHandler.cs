@@ -33,7 +33,6 @@ public class PlayerPickUpHandler : MonoBehaviour
     private InventoryController InventoryContrtoller;
     private PlayerMovement PlayerMovement;
     public Transform PickupableObjectsParent;
-    public PlayerAttributes PlayerAttributes;
     void Start()
     {
         InventoryContrtoller = GetComponent<InventoryController>();
@@ -57,14 +56,11 @@ public class PlayerPickUpHandler : MonoBehaviour
         else
         {
             Debug.Log("It's a Permanent Usage Item");
-            ConsumeItem(item);
+            InventoryContrtoller.ConsumeItem(item.Attributes);
         }
         DestroyImmediate(obj.gameObject);
     }
-    void ConsumeItem(Item item)
-    {
-        PlayerAttributes.EnableAttribute(item.Attributes);
-    }
+    
     public void CreatePickupableItem(Item item, float distance = 1)
     {
         PickupableObject tempPickupable = ObjectPoolManager.Instance.GetObject<PickupableObject>(PICKUPABLE_ITEM_PREFAB_KEY);

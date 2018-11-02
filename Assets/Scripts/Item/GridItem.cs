@@ -101,15 +101,26 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
                 }
                 
             }
+            else if (eventData.button == PointerEventData.InputButton.Middle)
+            {
+                if (_item.Consuming==Item.Consumability.Consumable)
+                {
+                    InventoryController.Instance.ConsumeGridItem(this);
+                }
+                else
+                {
+                    Debug.LogError("Not Consumable");
+                }
+            }
         }
-
-
-
-
     }
     public GeneralPanel GetContainedPanel()
     {
         return parentPanel;
+    }
+    public int GetCurrentNumber()
+    {
+        return _currentNumber;
     }
 
 }

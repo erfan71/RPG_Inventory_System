@@ -28,6 +28,37 @@ public class InventoryController : MonoBehaviour
     public KeyCode ITEM_DROP_KEY_SHORTCUT = KeyCode.R;
 
     private Dictionary<int, List<GridItem>> _items;
+    public PlayerAttributes PlayerAttributes;
+
+   
+    public void ConsumeItem(List<ItemAttribute> attributes)
+    {
+        PlayerAttributes.EnableAttribute(attributes);
+        Debug.Log("Item Cosumed");
+    }
+    public void ConsumeGridItem(GridItem item)
+    {
+        if (item is StackableGridItem)
+        {
+            StackableGridItem stkRef = item as StackableGridItem;
+            int currentNumber = item.GetCurrentNumber();
+            currentNumber -= 1;
+            
+            stkRef.SetCurrentNubmber(currentNumber);
+            
+            ConsumeItem(item.GetItemReference().Attributes);
+            if (currentNumber==0)
+             RemoveItemFromInventory(item,true);
+
+
+        }
+        else
+        {
+            ConsumeItem(item.GetItemReference().Attributes);
+            RemoveItemFromInventory(item,true);
+        }
+    }
+
     void Start()
     {
         EquipmentController = GetComponent<EquipmentController>();
@@ -85,7 +116,7 @@ public class InventoryController : MonoBehaviour
             AddNewGridItem(item, false);
         }
     }
-    public void RemoveItemFromInventory(GridItem item)
+    public void RemoveItemFromInventory(GridItem item, bool destroyObject)
     {
         if (_items.ContainsKey(item.GetItemReference().Id))
         {
@@ -95,15 +126,15 @@ public class InventoryController : MonoBehaviour
             {
                 _items.Remove(item.GetItemReference().Id);
             }
-        }
-        //EquipmentController.RemoveItem(item.GetItemReference());
+            if (destroyObject)
+            ObjectPoolManager.Instance.RecycleObject(item.GetComponent<PoolableObjectInstance>());
 
+        }
     }
     public void ForceEquipItem(GridItem item)
     {
-        RemoveItemFromInventory(item);
+        RemoveItemFromInventory(item,true);
         AddToInventory(item.GetItemReference(), true, true);
-        ObjectPoolManager.Instance.RecycleObject(item.GetComponent<PoolableObjectInstance>());
     }
     public void SendItemToTheGround(GridItem _gridItem)
     {
