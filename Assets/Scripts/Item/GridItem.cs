@@ -68,10 +68,7 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
         if (ItemUnderTheMouse.Instance.IsAnythingClicked())
         {
             ItemUnderTheMouse.Instance.AddCurrentItemToInventory(true);
-            //InventoryController.Instance.ForceEquipItem(this);
-
-            // GoIntoTheAir();
-
+         
         }
         else
         {
