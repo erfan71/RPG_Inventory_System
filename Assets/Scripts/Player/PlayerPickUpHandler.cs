@@ -66,7 +66,14 @@ public class PlayerPickUpHandler : MonoBehaviour
         PickupableObject tempPickupable = ObjectPoolManager.Instance.GetObject<PickupableObject>(PICKUPABLE_ITEM_PREFAB_KEY);
         tempPickupable.ItemId = item.Id;
         tempPickupable.transform.position = PlayerMovement.GetPosition();
+
         Vector2 randomePoint = UnityEngine.Random.insideUnitCircle * distance;
+
+        while(randomePoint.magnitude < 0.9f)
+        {
+            randomePoint = UnityEngine.Random.insideUnitCircle * distance;
+        }
+
         tempPickupable.transform.Translate(randomePoint);
         tempPickupable.transform.parent = PickupableObjectsParent;
         tempPickupable.transform.localScale = _pickupScale;
