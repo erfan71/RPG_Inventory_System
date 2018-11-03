@@ -39,9 +39,6 @@ public class AnalyticsManager : MonoBehaviour
         PlayerMovement.On10UnitMove += On10UnitMoveCallBack;
         ObstacleCollisionDetector.OnObstacleCollisionEvent += OnObstacleCollisionCallBack;
     }
-
-   
-
     private void OnDestroy()
     {
         InventoryController.OnItemPickedUpEvent -= ItemPickedUpToInventory;
@@ -50,12 +47,6 @@ public class AnalyticsManager : MonoBehaviour
         GeneralPanel.OnPanelOpened -= OnPanelOpenedCallBack;
         PlayerMovement.On10UnitMove -= On10UnitMoveCallBack;
         ObstacleCollisionDetector.OnObstacleCollisionEvent -= OnObstacleCollisionCallBack;
-
-
-    }
-    void Update()
-    {
-
     }
     /// <summary>
     /// We assume that this scene just runs one-time per session. In a real scenario, we have to call this function in scenes that
@@ -109,7 +100,6 @@ public class AnalyticsManager : MonoBehaviour
         param.Add("name", obj);
 
         Analytics.CustomEvent("OnPanleOpened", param);
-
     }
     private void On10UnitMoveCallBack()
     {
@@ -117,9 +107,7 @@ public class AnalyticsManager : MonoBehaviour
         {
             Analytics.CustomEvent("10UnitMove");
             _numberOfMoveSent++;
-
         }
-
 
     }
     private void OnObstacleCollisionCallBack()
