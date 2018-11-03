@@ -15,18 +15,19 @@ public class CameraFollowPlayer : MonoBehaviour
     void Start()
     {
         _lastPos = Player.GetPosition();
-        _cameraHeightHalf = Camera.main.orthographicSize;
-        _cameraWidthHalf = _cameraHeightHalf * Camera.main.aspect;
+       
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        _cameraHeightHalf = Camera.main.orthographicSize;
+        _cameraWidthHalf = _cameraHeightHalf * Camera.main.aspect;
         Vector2 currentPlayerPos = Player.GetPosition();
         Vector2 currentCameraPos = transform.position;
         Vector2 positionDiff = currentPlayerPos - _lastPos;
         _lastPos = currentPlayerPos;
-        if (positionDiff.sqrMagnitude == 0) return;
+       // if (positionDiff.sqrMagnitude == 0) return;
 
         float cameraRightAncher = currentCameraPos.x + _cameraWidthHalf * 0.5f;
         float cameraLeftAncher = currentCameraPos.x - _cameraWidthHalf * 0.5f;
@@ -63,14 +64,24 @@ public class CameraFollowPlayer : MonoBehaviour
                 cameraFollow = false;
             }
         }
-
-        if (!cameraFollow) return;
-
         Vector2 nextCameraPos = currentCameraPos;
+        if (cameraFollow)
+        {
+            
+            nextCameraPos.x = Mathf.Clamp(currentCameraPos.x + positionDiff.x, _mapBoundry.bounds.min.x + _cameraWidthHalf, _mapBoundry.bounds.max.x - _cameraWidthHalf);
+            nextCameraPos.y = Mathf.Clamp(currentCameraPos.y + positionDiff.y, _mapBoundry.bounds.min.y + _cameraHeightHalf, _mapBoundry.bounds.max.y - _cameraHeightHalf);
 
-        nextCameraPos.x = Mathf.Clamp(currentCameraPos.x + positionDiff.x, _mapBoundry.bounds.min.x + _cameraWidthHalf, _mapBoundry.bounds.max.x - _cameraWidthHalf);
-        nextCameraPos.y = Mathf.Clamp(currentCameraPos.y + positionDiff.y, _mapBoundry.bounds.min.y + _cameraHeightHalf, _mapBoundry.bounds.max.y - _cameraHeightHalf);
+            transform.position = new Vector3(nextCameraPos.x, nextCameraPos.y, transform.position.z);
 
-        transform.position = new Vector3(nextCameraPos.x, nextCameraPos.y, transform.position.z);
+        }
+        else
+        {
+
+            nextCameraPos.x = Mathf.Clamp(currentCameraPos.x , _mapBoundry.bounds.min.x + _cameraWidthHalf, _mapBoundry.bounds.max.x - _cameraWidthHalf);
+            nextCameraPos.y = Mathf.Clamp(currentCameraPos.y , _mapBoundry.bounds.min.y + _cameraHeightHalf, _mapBoundry.bounds.max.y - _cameraHeightHalf);
+            transform.position = new Vector3(nextCameraPos.x, nextCameraPos.y, transform.position.z);
+        }
+
+       
     }
 }

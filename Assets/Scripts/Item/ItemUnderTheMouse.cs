@@ -98,7 +98,7 @@ public class ItemUnderTheMouse : MonoBehaviour
                         }
                         else
                         {
-                            if (!OnBehindTheSceneClicked())
+                            if (!OnBehindTheSceneLogic())
                             {
                                 AddCurrentItemToInventory(!_fromInventory);
 
@@ -182,7 +182,7 @@ public class ItemUnderTheMouse : MonoBehaviour
             }
         }
     }
-    public bool OnBehindTheSceneClicked()
+    public bool OnBehindTheSceneLogic()
     {
         if
             ((InventoryUI.State == GeneralPanel.PopUpState.Closed && EquipmentUI.State == GeneralPanel.PopUpState.Opened) ||
@@ -196,6 +196,10 @@ public class ItemUnderTheMouse : MonoBehaviour
             return false;
         }
         return false;
+    }
+    public void  OnBehindTheSceneClicked()
+    {
+        OnBehindTheSceneLogic();
     }
     public void AddCurrentItemToInventory(bool Equip)
     {
