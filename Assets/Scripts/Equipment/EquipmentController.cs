@@ -44,6 +44,8 @@ public class EquipmentController : MonoBehaviour
 
     private const string GRID_PREFAB_KEY = "GridItem";
 
+    public static System.Action<Item> OnItemEquipedEvent;
+
     private void Start()
     {
         Equipments = new Dictionary<Item.EquipmentCategory, Equipment>();
@@ -109,6 +111,8 @@ public class EquipmentController : MonoBehaviour
         Equipments[item.Equipment] = new Equipment(SlotState.Equiped, gItem);
 
         PlayerAttributes.EnableAttribute(item);
+
+        OnItemEquipedEvent?.Invoke(item);
 
         return Equipments[item.Equipment];
     }

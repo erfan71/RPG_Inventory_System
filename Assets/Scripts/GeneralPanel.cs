@@ -13,6 +13,8 @@ public class GeneralPanel : MonoBehaviour {
     public System.Action<GeneralPanel> OnOpenCloseActionCallBack;
     public Text Title;
     public string TitleText;
+    public static System.Action<string> OnPanelOpened;
+
 
     public enum PopUpState
     {
@@ -48,7 +50,6 @@ public class GeneralPanel : MonoBehaviour {
     // Update is called once per frame
     void OnOpenClicked()
     {
-
         OpenPanel();
     }
     void OnCloseClicked()
@@ -61,6 +62,7 @@ public class GeneralPanel : MonoBehaviour {
         PanelRoot.SetActive(true);
         _state = PopUpState.Opened;
         OnOpenCloseActionCallBack?.Invoke(this);
+        OnPanelOpened?.Invoke(TitleText);
     }
     public void ClosePanel()
     {

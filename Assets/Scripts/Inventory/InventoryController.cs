@@ -30,12 +30,17 @@ public class InventoryController : MonoBehaviour
     private Dictionary<int, List<GridItem>> _items;
     public PlayerAttributes PlayerAttributes;
 
-   
+    public static System.Action<Item> OnItemPickedUpEvent;
+    public static System.Action<Item> OnItemConsumed;
+
+
     public void ConsumeItem(Item item)
     {
         
         PlayerAttributes.EnableAttribute(item);
-        Debug.Log("Item Cosumed");
+        Debug.Log("Item Cosumed: "+item.Name);
+
+        OnItemConsumed?.Invoke(item);
     }
     public void ConsumeGridItem(GridItem item)
     {
@@ -50,8 +55,6 @@ public class InventoryController : MonoBehaviour
             ConsumeItem(item.GetItemReference());
             if (currentNumber==0)
              RemoveItemFromInventory(item,true);
-
-
         }
         else
         {
@@ -116,6 +119,7 @@ public class InventoryController : MonoBehaviour
         {
             AddNewGridItem(item, false);
         }
+        OnItemPickedUpEvent?.Invoke(item);
     }
     public void RemoveItemFromInventory(GridItem item, bool destroyObject)
     {
