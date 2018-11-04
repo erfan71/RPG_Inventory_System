@@ -31,7 +31,6 @@ public class GeneralPanel : MonoBehaviour {
     }
     void Start()
     {
-        Debug.Log(name);
         OpenButton.onClick.AddListener(() => OnOpenClicked());
         CloseButton.onClick.AddListener(() => OnCloseClicked());
         _state = PopUpState.Closed;
