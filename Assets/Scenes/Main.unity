@@ -600,7 +600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 206461608}
   - component: {fileID: 206461609}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 266145284}
   - component: {fileID: 266145285}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Boundry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2258,6 +2258,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2349,10 +2350,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e73dbddec8ee24db4c63882c18be41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZoomSpeedTouch: 0.1
+  ZoomSpeedTouch: 0.01
   ZoomSpeedMouse: 5
   MinZoom: 7
   MaxZoom: 2
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1690312454, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 275
+  m_MaxRayIntersections: 1
 --- !u!1001 &522684401
 Prefab:
   m_ObjectHideFlags: 0
@@ -3107,7 +3123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &699480180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3827,7 +3843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 999687779}
   - component: {fileID: 999687780}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5422,7 +5438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1428929266}
   - component: {fileID: 1428929267}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5824,7 +5840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589062336}
   - component: {fileID: 1589062337}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7304,6 +7320,16 @@ Prefab:
       propertyPath: Joystick
       value: 
       objectReference: {fileID: 532816785}
+    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
+        type: 2}
+      propertyPath: PickupStrategyMethodName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114748387320033712, guid: 4fea7f5225000fc44aea1341de79b8ec,
+        type: 2}
+      propertyPath: BehindTheSceneDetector
+      value: 
+      objectReference: {fileID: 699480179}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fea7f5225000fc44aea1341de79b8ec, type: 2}
   m_IsPrefabAsset: 0

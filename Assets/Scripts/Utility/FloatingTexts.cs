@@ -66,8 +66,6 @@ public class FloatingTexts : MonoBehaviour
             case Type.Positive:
                 obj.color = Color.green;
                 break;
-
-
         }
 
         obj.transform.SetParent(_parentObj);

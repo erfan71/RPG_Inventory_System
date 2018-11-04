@@ -21,7 +21,7 @@ public class PlayerPickUpHandler : MonoBehaviour
     private PickupStrategyMethod _currentSelectedStrategyName;
 
     public const string PICKUPABLE_ITEM_TAG = "Pickupable";
-    public const float MIN_DISTANCE_TO_PICKUPABLE = 1;
+    public const float MIN_DISTANCE_TO_PICKUPABLE = 2;
     public const float OVERLAP_RADIUS = 0.25f;
     public const float CIRCLE_CAST_DISTANCE = 0.25f;
     public const string PICKUPABLE_ITEM_LAYER = "PickupableLayer";
@@ -58,13 +58,11 @@ public class PlayerPickUpHandler : MonoBehaviour
             InventoryContrtoller.AddToInventory(item, true);
         }
         else
-        {
-           
+        {       
             InventoryContrtoller.ConsumeItem(item);
         }
-        DestroyImmediate(obj.gameObject);
+        Destroy(obj.gameObject);
     }
-    
     public void CreatePickupableItem(Item item, float distance = 1)
     {
         PickupableObject tempPickupable = ObjectPoolManager.Instance.GetObject<PickupableObject>(PICKUPABLE_ITEM_PREFAB_KEY);

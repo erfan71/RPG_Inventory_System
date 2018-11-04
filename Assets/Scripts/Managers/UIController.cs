@@ -10,8 +10,10 @@ public class UIController : MonoBehaviour
     public GeneralPanel EquipmentPanel;
     public GeneralPanel SpawningPanel;
     public GeneralPanel AttributePanel;
+    public GameObject BehindTheSceneDetector;
     void Start()
     {
+        BehindTheSceneDetector.SetActive(false);
         InventroyPanel.OnOpenCloseActionCallBack += OnPanelOpenCloseActionCallBack;
         EquipmentPanel.OnOpenCloseActionCallBack += OnPanelOpenCloseActionCallBack;
         SpawningPanel.OnOpenCloseActionCallBack += OnPanelOpenCloseActionCallBack;
@@ -39,6 +41,9 @@ public class UIController : MonoBehaviour
             SpawningPanel.SetOpenButtonActive(false);
             AttributePanel.SetOpenButtonActive(false);
 
+            BehindTheSceneDetector.SetActive(true);
+
+
         }
         else if (InventroyPanel.State == GeneralPanel.PopUpState.Closed && EquipmentPanel.State == GeneralPanel.PopUpState.Closed)
         {
@@ -46,6 +51,8 @@ public class UIController : MonoBehaviour
                 SpawningPanel.SetOpenButtonActive(true);
             if (AttributePanel.State == GeneralPanel.PopUpState.Closed)
                 AttributePanel.SetOpenButtonActive(true);
+            BehindTheSceneDetector.SetActive(false);
+
         }
     }
 
