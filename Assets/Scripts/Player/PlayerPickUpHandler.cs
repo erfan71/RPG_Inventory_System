@@ -48,14 +48,20 @@ public class PlayerPickUpHandler : MonoBehaviour
     }
     private void OnItemPickedUpCallBack(PickupableObject obj)
     {
-        Debug.Log("Item PickedUp: " + obj.GetItemName());
+      
 
         Item item = obj.GetItemReference();
         if (item.PickupType == Item.PickUpType.Pickupable)
+        {
+            Debug.Log("Item PickedUp: " + obj.GetItemName());
+            FloatingTexts.Instance.Show("Item PickedUp: " + obj.GetItemName(), FloatingTexts.Type.Info);
             InventoryContrtoller.AddToInventory(item, true);
+        }
         else
         {
-            Debug.Log("It's a Permanent Usage Item");
+           // Debug.Log("It's not a pickupable Item, It consumes automatically");
+            //FloatingTexts.Instance.Show("Not Consumable", FloatingTexts.Type.Warning);
+
             InventoryContrtoller.ConsumeItem(item);
         }
         DestroyImmediate(obj.gameObject);

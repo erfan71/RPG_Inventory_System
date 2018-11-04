@@ -119,6 +119,8 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
                 else
                 {
                     Debug.LogError("Not Equipable");
+                    FloatingTexts.Instance.Show("Not Equipable", FloatingTexts.Type.Error);
+
                 }
             }
             else if (eventData.button == PointerEventData.InputButton.Middle)
@@ -130,6 +132,7 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
                 else
                 {
                     Debug.LogError("Not Consumable");
+                    FloatingTexts.Instance.Show("Not Consumable",FloatingTexts.Type.Error);
                 }
             }
 

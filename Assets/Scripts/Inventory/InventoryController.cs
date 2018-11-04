@@ -39,7 +39,7 @@ public class InventoryController : MonoBehaviour
         
         PlayerAttributes.EnableAttribute(item);
         Debug.Log("Item Cosumed: "+item.Name);
-
+        FloatingTexts.Instance.Show("Item Cosumed: " + item.Name,FloatingTexts.Type.Positive);
         OnItemConsumed?.Invoke(item);
     }
     public void ConsumeGridItem(GridItem item)

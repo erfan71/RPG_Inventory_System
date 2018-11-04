@@ -28,10 +28,13 @@ public class EquipmentSlot : MonoBehaviour, IPointerClickHandler , IPointerEnter
                 if (gridItem.GetItemReference().Equipment == Item.EquipmentCategory.NotEquippable)
                 {
                     Debug.LogError("Not Equipable");
+                    FloatingTexts.Instance.Show("Not Equipable", FloatingTexts.Type.Error);
+
                 }
                 else
                 {
                     Debug.LogError("Not Suitable for this slot: " + EquipmentType.ToString());
+                    FloatingTexts.Instance.Show("Not Suitable for this slot: " + EquipmentType.ToString(), FloatingTexts.Type.Error);
 
                 }
             }
