@@ -834,8 +834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 266145284}
   - component: {fileID: 266145285}
-  - component: {fileID: 266145286}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Boundry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -884,36 +883,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.429105, y: 7.6350746}
   m_EdgeRadius: 0
---- !u!114 &266145286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 266145283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1094562523}
-          m_MethodName: OnGroundClicked
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &277999518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,23 +2954,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4676612375046298, guid: 0153f43c17164c54883f142852269b7c,
     type: 2}
   m_PrefabInternal: {fileID: 737276311}
---- !u!1 &641069080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1855439210458454, guid: 4fea7f5225000fc44aea1341de79b8ec,
-    type: 2}
-  m_PrefabInternal: {fileID: 2140578520}
---- !u!114 &641069081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 641069080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece8a995e1a2ac24c9baa9f50ae4eec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attributeUI: {fileID: 1789841507}
 --- !u!1 &661575489
 GameObject:
   m_ObjectHideFlags: 0
@@ -7296,16 +7248,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
+    - target: {fileID: 114405992916128910, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
-      propertyPath: PickupableObjectsParent
+      propertyPath: _attributeUI
       value: 
-      objectReference: {fileID: 1625473907}
-    - target: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: InventoryUI
-      value: 
-      objectReference: {fileID: 1135670255}
+      objectReference: {fileID: 1789841507}
     - target: {fileID: 114748387320033712, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
       propertyPath: InventroyPanel
@@ -7314,11 +7261,6 @@ Prefab:
     - target: {fileID: 114748387320033712, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
       propertyPath: EquipmentPanel
-      value: 
-      objectReference: {fileID: 433563712}
-    - target: {fileID: 114514516911164094, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: EquipmentUI
       value: 
       objectReference: {fileID: 433563712}
     - target: {fileID: 114748387320033712, guid: 4fea7f5225000fc44aea1341de79b8ec,
@@ -7331,46 +7273,31 @@ Prefab:
       propertyPath: AttributePanel
       value: 
       objectReference: {fileID: 1789841507}
-    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PlayerAttributes
-      value: 
-      objectReference: {fileID: 641069081}
-    - target: {fileID: 114514516911164094, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PlayerAttributes
-      value: 
-      objectReference: {fileID: 641069081}
-    - target: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PlayerAttributes
-      value: 
-      objectReference: {fileID: 641069081}
-    - target: {fileID: 114226254463735088, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: Joystick
-      value: 
-      objectReference: {fileID: 532816785}
-    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
-        type: 2}
-      propertyPath: PickupStrategyMethodName
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114748387320033712, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
       propertyPath: BehindTheSceneDetector
       value: 
       objectReference: {fileID: 699480179}
-    - target: {fileID: 212451893489234612, guid: 4fea7f5225000fc44aea1341de79b8ec,
+    - target: {fileID: 114226254463735088, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
-      propertyPath: m_SortingLayerID
-      value: -1273677849
-      objectReference: {fileID: 0}
-    - target: {fileID: 212451893489234612, guid: 4fea7f5225000fc44aea1341de79b8ec,
+      propertyPath: Joystick
+      value: 
+      objectReference: {fileID: 532816785}
+    - target: {fileID: 114514516911164094, guid: 4fea7f5225000fc44aea1341de79b8ec,
         type: 2}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
+      propertyPath: EquipmentUI
+      value: 
+      objectReference: {fileID: 433563712}
+    - target: {fileID: 114073034470209568, guid: 4fea7f5225000fc44aea1341de79b8ec,
+        type: 2}
+      propertyPath: InventoryUI
+      value: 
+      objectReference: {fileID: 1135670255}
+    - target: {fileID: 114512809675611812, guid: 4fea7f5225000fc44aea1341de79b8ec,
+        type: 2}
+      propertyPath: PickupableObjectsParent
+      value: 
+      objectReference: {fileID: 1625473907}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fea7f5225000fc44aea1341de79b8ec, type: 2}
   m_IsPrefabAsset: 0
@@ -7413,16 +7340,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212585228627708048, guid: 36ea333af0969f242a97e04b07dabbbe,
-        type: 2}
-      propertyPath: m_SortingLayerID
-      value: -1139823837
-      objectReference: {fileID: 0}
-    - target: {fileID: 212585228627708048, guid: 36ea333af0969f242a97e04b07dabbbe,
-        type: 2}
-      propertyPath: m_SortingLayer
-      value: -1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114081473623273012, guid: 36ea333af0969f242a97e04b07dabbbe, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 36ea333af0969f242a97e04b07dabbbe, type: 2}
   m_IsPrefabAsset: 0

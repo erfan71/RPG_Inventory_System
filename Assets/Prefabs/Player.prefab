@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 95877839762232044}
   - component: {fileID: 50651611956058638}
   - component: {fileID: 61963323245661330}
+  - component: {fileID: 114759820224236560}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -45,6 +46,7 @@ GameObject:
   - component: {fileID: 114748387320033712}
   - component: {fileID: 114073034470209568}
   - component: {fileID: 114514516911164094}
+  - component: {fileID: 114405992916128910}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -59,7 +61,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1855439210458454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.37, y: 3.3, z: 0}
+  m_LocalPosition: {x: 2.55, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4733919895989128}
@@ -155,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryUI: {fileID: 0}
   ITEM_DROP_KEY_SHORTCUT: 114
+  PlayerAttributes: {fileID: 114405992916128910}
 --- !u!114 &114226254463735088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4c8df98c3a74c46ae3e9646ac58f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Joystick: {fileID: 0}
 --- !u!114 &114233357416606382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,6 +182,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 95877839762232044}
+--- !u!114 &114405992916128910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855439210458454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece8a995e1a2ac24c9baa9f50ae4eec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attributeUI: {fileID: 0}
 --- !u!114 &114512809675611812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e51f1b35ca2fce4193e0d4e30fd26f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickupStrategyMethodName: 2
+  PickupStrategyMethodName: 0
   PickupableObjectsParent: {fileID: 0}
 --- !u!114 &114514516911164094
 MonoBehaviour:
@@ -203,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EquipmentUI: {fileID: 0}
+  PlayerAttributes: {fileID: 114405992916128910}
 --- !u!114 &114541882494341060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,6 +246,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventroyPanel: {fileID: 0}
   EquipmentPanel: {fileID: 0}
+  SpawningPanel: {fileID: 0}
+  AttributePanel: {fileID: 0}
+  BehindTheSceneDetector: {fileID: 0}
+--- !u!114 &114759820224236560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836580419683686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2836be26cfe292e4b9dad44d4744aedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212451893489234612
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -261,8 +292,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1273677849
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300156, guid: 370924d32db78344d80298b0a01a69d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
