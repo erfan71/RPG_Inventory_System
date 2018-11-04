@@ -172,6 +172,34 @@ MonoBehaviour:
     AttributeConsumeType: 1
     FixDuration: 10
     RampDuration: 0
+  - Name: Sword
+    Id: 11
+    Image: {fileID: 21300000, guid: c233e57667e152b4a8fe1752e0da4035, type: 3}
+    Equipment: 0
+    Stacking: 1
+    Consuming: 1
+    ItemType: 2
+    PickupType: 0
+    Attributes:
+    - Type: 0
+      EffectValue: 20
+    AttributeConsumeType: 1
+    FixDuration: 10
+    RampDuration: 0
+  - Name: Wooden Sheild
+    Id: 12
+    Image: {fileID: 21300000, guid: 7f452abbb6bbeb84eac90cd2a6874bfb, type: 3}
+    Equipment: 1
+    Stacking: 1
+    Consuming: 1
+    ItemType: 2
+    PickupType: 0
+    Attributes:
+    - Type: 1
+      EffectValue: 5
+    AttributeConsumeType: 1
+    FixDuration: 10
+    RampDuration: 0
   TypesStackMax:
   - Type: 0
     Limitation: 1
