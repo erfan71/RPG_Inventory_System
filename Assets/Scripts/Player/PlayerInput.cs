@@ -15,7 +15,7 @@ public class PlayerInput : MonoBehaviour
 
     void Awake()
     {
-#if UNITY_ANDROID || UNITY_IOS || INPUT_DEBUG
+#if (UNITY_ANDROID && !UNITY_EDITOR) || INPUT_DEBUG
         _horizontal = Joystick.Horizontal;
         _Vertical = Joystick.Vertical;
         Joystick.gameObject.SetActive(true);
@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-#if UNITY_ANDROID || UNITY_IOS || INPUT_DEBUG
+#if (UNITY_ANDROID && !UNITY_EDITOR) || INPUT_DEBUG
         _horizontal = Joystick.Horizontal;
         _Vertical = Joystick.Vertical;
 #else 

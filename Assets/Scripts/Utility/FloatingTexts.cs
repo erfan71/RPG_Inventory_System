@@ -40,9 +40,15 @@ public class FloatingTexts : MonoBehaviour
         Warning,
         Error
     }
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     public void Show(string text, Type showType)
     {
+
+     
         Text obj = ObjectPoolManager.Instance.GetObject<Text>(FLOATING_TEXT_PREFAB_KEY);
         obj.text = text;
 
@@ -63,14 +69,18 @@ public class FloatingTexts : MonoBehaviour
 
 
         }
+
         obj.transform.SetParent(_parentObj);
+
         obj.transform.localScale = Vector3.one;
+
         StartCoroutine(EffectCR(obj));
     }
 
   
     IEnumerator EffectCR(Text text_cmp)
     {
+
         float i = 0.0f;
         float rate = 1.0f / _effectTime;
 
@@ -78,6 +88,7 @@ public class FloatingTexts : MonoBehaviour
         rect.anchoredPosition = Vector2.zero;
         Vector2 final_pos = new Vector2(0, FLOATING_TEXT_GO_UP_VALUE);
         Color firstColor = text_cmp.color;
+
         while (i <= 1)
         {
             i += Time.deltaTime * rate;

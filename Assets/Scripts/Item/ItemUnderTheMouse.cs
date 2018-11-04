@@ -10,12 +10,13 @@ public class ItemUnderTheMouse : MonoBehaviour
     public EquipmentUI EquipmentUI;
     public InventoryController Inventory;
     public EquipmentController Equipment;
-
     private bool _longPressMode = false;
 
     private const string UNDER_MOUSE_ICON_PREFAB_KEY = "UnderMouse";
     UnderMouseItem underItem;
     private bool _fromInventory = false;
+     
+
     #region SingletonPattern
     private static ItemUnderTheMouse _instance;
     public static ItemUnderTheMouse Instance
@@ -62,55 +63,52 @@ public class ItemUnderTheMouse : MonoBehaviour
         underItem.transform.SetParent(InventoryUI.CanvasRoot.transform);
         underItem.transform.localScale = Vector2.one;
         ObjectPoolManager.Instance.RecycleObject(_gridItem.GetComponent<PoolableObjectInstance>());
-        StartCoroutine(InTheAirControl());
         _longPressMode = longPressMode;
 
+        if (_longPressMode)
+        {
+            InventoryUI.SetScrollRectActive(false);
+        }
+        
 
     }
     private void SetPosition(Vector2 screenPos)
     {
         underItem.transform.position = screenPos;
     }
-
-
-    private IEnumerator InTheAirControl()
+    private void Update()
     {
-        while (_gridItem != null)
+        if (_gridItem == null) return;
+        if (Input.GetKeyDown(InventoryController.Instance.ITEM_DROP_KEY_SHORTCUT))
         {
-            if (Input.GetKeyDown(InventoryController.Instance.ITEM_DROP_KEY_SHORTCUT))
+            SendItemToTheGround();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (_longPressMode)
             {
-                SendItemToTheGround();
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                if (_longPressMode)
+                if (_lastEnterEquipmentSlot != null)
                 {
-                    if (_lastEnterEquipmentSlot != null)
+                    EquipLogic();
+                }
+                else
+                {
+                    if (InventoryDropped)
                     {
-                        EquipLogic();
+                        AddCurrentItemToInventory(false);
                     }
                     else
                     {
-                        if (InventoryDropped)
+                        if (!OnBehindTheSceneLogic())
                         {
-                            AddCurrentItemToInventory(false);
-
-                        }
-                        else
-                        {
-                            if (!OnBehindTheSceneLogic())
-                            {
-                                AddCurrentItemToInventory(!_fromInventory);
-
-                            }              
+                            AddCurrentItemToInventory(!_fromInventory);
                         }
                     }
                 }
             }
-            else
-                SetPosition(Input.mousePosition);
-            yield return null;
         }
+        else
+            SetPosition(Input.mousePosition);
     }
     private EquipmentSlot _lastEnterEquipmentSlot;
     private EquipmentSlot _startDraggedEquipmentSlot;
@@ -126,12 +124,22 @@ public class ItemUnderTheMouse : MonoBehaviour
     }
     public void ExitInventory()
     {
+        StartCoroutine(ExitInventoryRoutine());
+    }
+    IEnumerator ExitInventoryRoutine()
+    {
+        yield return new WaitForEndOfFrame();
         InventoryDropped = false;
-
+    }
+    IEnumerator ExitEquipmentSlotRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+        _lastEnterEquipmentSlot = null;
     }
     public void ExitEquipmentSlot()
     {
-        _lastEnterEquipmentSlot = null;
+        StartCoroutine(ExitEquipmentSlotRoutine());
+
     }
 
     void EquipLogic()
@@ -167,7 +175,8 @@ public class ItemUnderTheMouse : MonoBehaviour
         ObjectPoolManager.Instance.RecycleObject(underItem.GetComponent<PoolableObjectInstance>());
         _gridItem = null;
         _longPressMode = false;
-        Debug.Log("ReleaseCurrentDraggedItem");
+        InventoryUI.SetScrollRectActive(true);
+
     }
     private void OnPanelOpenCloseActionCallBack(GeneralPanel panel)
     {
@@ -197,7 +206,7 @@ public class ItemUnderTheMouse : MonoBehaviour
         }
         return false;
     }
-    public void  OnBehindTheSceneClicked()
+    public void OnBehindTheSceneClicked()
     {
         OnBehindTheSceneLogic();
     }

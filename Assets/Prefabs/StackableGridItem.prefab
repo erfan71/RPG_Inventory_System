@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc628b0c9bdbd2740af1437d61963b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durationThreshold: 1
+  durationThreshold: 0.5
   onLongPress:
     m_PersistentCalls:
       m_Calls:

@@ -36,10 +36,6 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
     {
         GridIcon.sprite = _item.Image;
     }
-    //private void SetPosition(Vector2 screenPos)
-    //{
-    //    transform.position = screenPos;
-    //}
 
     private void GoIntoTheAir(bool longPress)
     {
@@ -49,21 +45,8 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
         GetComponent<Image>().raycastTarget = false;
         ItemUnderTheMouse.Instance.SetCurrentDragedItem(this, longPress);
     }
-
-    //private IEnumerator InTheAirControl()
-    //{
-    //    while (_state == State.InTheAir)
-    //    {
-    //        if (Input.GetKeyDown(InventoryController.Instance.ITEM_DROP_KEY_SHORTCUT))
-    //        {
-    //            ItemUnderTheMouse.Instance.SendItemToTheGround();
-    //        }
-    //        else
-    //            SetPosition(Input.mousePosition);
-    //        yield return null;
-    //    }
-    //}
-
+    float _lastClick = 0f;
+    float _interval = 0.4f;
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
 
@@ -73,8 +56,10 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
         }
         else
         {
-#if UNITY_ANDROID || UNITY_IOS || INPUT_DEBUG
-            if (eventData.clickCount == 2)
+
+#if (UNITY_ANDROID && !UNITY_EDITOR) || INPUT_DEBUG
+           
+            if ((_lastClick + _interval) > Time.time)
             {
                 if (_item.Equipment != Item.EquipmentCategory.NotEquippable)
                 {
@@ -88,13 +73,15 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
                     {
                         InventoryController.Instance.ForceEquipItem(this);
                     }
-                }
+                }             
                 else if (_item.Consuming == Item.Consumability.Consumable)
                 {
                     InventoryController.Instance.ConsumeGridItem(this);
                 }
+               
             }
-#endif
+            _lastClick = Time.time;
+#else
 
             if (eventData.button == PointerEventData.InputButton.Left)
             {
@@ -135,8 +122,7 @@ public class GridItem : ItemBehaviour, IPointerClickHandler
                     FloatingTexts.Instance.Show("Not Consumable",FloatingTexts.Type.Error);
                 }
             }
-
-
+#endif
         }
     }
 

@@ -4,59 +4,73 @@
 /// </summary>
 public class PinchZoom : MonoBehaviour
 {
-    public float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.
-    public  float MinZoom = 7;
-    public float MaxZoom = 2;
-    private Camera _camera;
-    float targetOrtho = 0;
+    public float ZoomSpeedTouch = 0.1f;
+    public float ZoomSpeedMouse = 0.5f;
+    public float MinZoom;
+    public float MaxZoom;
+    private Vector2[] _lastZoomPositions; // Touch mode only
+    private bool _wasZoomingLastFrame; // Touch mode only
 
+    private Camera _camera;
     private void Start()
     {
         _camera = Camera.main;
-        targetOrtho = _camera.orthographicSize;
+        _wasZoomingLastFrame = false;
     }
 
     void Update()
     {
-#if UNITY_ANDROID || UNITY_IOS
+#if (UNITY_ANDROID && !UNITY_EDITOR) || INPUT_DEBUG
 
-        // If there are two touches on the device...
+        HandleTouch();
+#else
+
+        HandleMouse();
+#endif
+    }
+    void HandleTouch()
+    {
         if (Input.touchCount == 2)
         {
-            // Store both touches.
-            Touch touchZero = Input.GetTouch(0);
-            Touch touchOne = Input.GetTouch(1);
+            Vector2[] newPositions = new Vector2[] { Input.GetTouch(0).position, Input.GetTouch(1).position };
 
-            // Find the position in the previous frame of each touch.
-            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
 
-            // Find the magnitude of the vector (the distance) between the touches in each frame.
-            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+            if (!_wasZoomingLastFrame)
+            {
+                _lastZoomPositions = newPositions;
+                _wasZoomingLastFrame = true;
+            }
+            else
+            {
+                if (Input.touches[0].phase==TouchPhase.Moved && Input.touches[1].phase == TouchPhase.Moved)
+                {
+                    float newDistance = Vector2.Distance(newPositions[0], newPositions[1]);
+                    float oldDistance = Vector2.Distance(_lastZoomPositions[0], _lastZoomPositions[1]);
+                    float offset = newDistance - oldDistance;
 
-            // Find the difference in the distances between each frame.
-            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+                    ZoomCamera(offset, ZoomSpeedTouch);
+                }
+               
 
-            // If the camera is orthographic...
-           
-                // ... change the orthographic size based on the change in distance between the touches.
-           _camera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
+                _lastZoomPositions = newPositions;
+            }         
+        }     
+    }
 
-            // Make sure the orthographic size never drops below zero.
-            _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize, MaxZoom, MinZoom);
-           
-        }
-#endif
-
+    void HandleMouse()
+    {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll != 0.0f)
+        ZoomCamera(scroll, ZoomSpeedMouse);
+    }
+
+    void ZoomCamera(float offset, float speed)
+    {
+        if (offset == 0)
         {
-            targetOrtho -= scroll * orthoZoomSpeed;
-            targetOrtho = Mathf.Clamp(targetOrtho, MaxZoom, MinZoom);
+            return;
         }
-
-        _camera.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, 2 * Time.deltaTime);
-
+        _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - (offset * speed), MaxZoom, MinZoom);
+        //Debug.Log("old: " + _camera.orthographicSize + " new: " + newOrthSize);
+        //_camera.orthographicSize = Mathf.Clamp(newOrthSize, _camera.orthographicSize * 0.9f, _camera.orthographicSize * 1.1f);
     }
 }

@@ -8,6 +8,7 @@ public class InventoryUI : GeneralPanel
 {
     public Transform GridRoot;
     public Image PanelEventDetector;
+    public ScrollRect Scroll;
 
     public override void AddNewGridItem(GridItem gItem, Item item)
     {  
@@ -22,5 +23,9 @@ public class InventoryUI : GeneralPanel
     public void OnPanelClicked()
     {
         ItemUnderTheMouse.Instance.AddCurrentItemToInventory(false);
+    }
+    public void SetScrollRectActive(bool active)
+    {
+        Scroll.vertical = active;
     }
 }

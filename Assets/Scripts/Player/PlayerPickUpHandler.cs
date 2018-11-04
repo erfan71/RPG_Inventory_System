@@ -59,9 +59,7 @@ public class PlayerPickUpHandler : MonoBehaviour
         }
         else
         {
-           // Debug.Log("It's not a pickupable Item, It consumes automatically");
-            //FloatingTexts.Instance.Show("Not Consumable", FloatingTexts.Type.Warning);
-
+           
             InventoryContrtoller.ConsumeItem(item);
         }
         DestroyImmediate(obj.gameObject);
