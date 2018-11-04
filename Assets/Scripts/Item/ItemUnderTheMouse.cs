@@ -146,13 +146,13 @@ public class ItemUnderTheMouse : MonoBehaviour
             {
                 Debug.LogError("Not Equipable");
                 AddCurrentItemToInventory(!_fromInventory);
-
+                FloatingTexts.Instance.Show("Not Equipable", FloatingTexts.Type.Error);
             }
             else
             {
                 Debug.LogError("Not Suitable for this slot: " + _lastEnterEquipmentSlot.EquipmentType.ToString());
                 AddCurrentItemToInventory(!_fromInventory);
-
+                FloatingTexts.Instance.Show("Not Suitable for this slot: " + _lastEnterEquipmentSlot.EquipmentType.ToString(), FloatingTexts.Type.Error);
             }
         }
     }
