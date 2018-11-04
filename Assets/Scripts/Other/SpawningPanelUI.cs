@@ -14,7 +14,7 @@ public class SpawningPanelUI : GeneralPanel {
     public Button ShoesButton;
     public Button FoodButton;
     public Button CoinButton;
-    public Button PoitionButton;
+    public Button PoisonButton;
 
 	void Awake () {
 
@@ -24,7 +24,7 @@ public class SpawningPanelUI : GeneralPanel {
         ShoesButton.onClick.AddListener(() => PickupableManager.SpawnItem(Item.Type.Weapon_Equiable, Item.EquipmentCategory.Shoes));
         FoodButton.onClick.AddListener(() => PickupableManager.SpawnItem(Item.Type.Food, Item.EquipmentCategory.NotEquippable));
         CoinButton.onClick.AddListener(() => PickupableManager.SpawnItem(Item.Type.Coin, Item.EquipmentCategory.NotEquippable));
-        PoitionButton.onClick.AddListener(() => PickupableManager.SpawnItem(Item.Type.Poition, Item.EquipmentCategory.NotEquippable));
+        PoisonButton.onClick.AddListener(() => PickupableManager.SpawnItem(Item.Type.Poison, Item.EquipmentCategory.NotEquippable));
 
 
     }

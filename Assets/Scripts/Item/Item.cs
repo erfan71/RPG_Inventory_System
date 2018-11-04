@@ -31,7 +31,7 @@ public class Item {
         Coin,
         Food,
         Weapon_Equiable,
-        Poition
+        Poison
     }
     public enum MaxType
     {
